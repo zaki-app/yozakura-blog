@@ -1,0 +1,46 @@
+body {
+  background: var(--base-background);
+  padding: 0;
+  margin: 0;
+}
+
+.site-base {
+  width: 80%;
+  margin: 0 auto;
+  &__contents {
+    min-height: 100vh;
+  }
+}
+
+p,
+blockquote,
+dl,
+dd,
+dt,
+section {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.25s;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
