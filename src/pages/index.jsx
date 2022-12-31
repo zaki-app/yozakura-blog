@@ -1,6 +1,5 @@
-import Head from 'next/head';
 import Test from '@/components/Test';
-import PageSEO from '@components/PageSEO';
+import PageSEO from '@/components/PageSEO';
 
 // import { Inter } from '@next/font/google'
 
