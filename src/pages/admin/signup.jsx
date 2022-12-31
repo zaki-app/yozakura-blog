@@ -1,6 +1,6 @@
 import PageSEO from "@/components/PageSEO";
 import ContentsWrapper from "@/components/ContentsWrapper";
-import { setValue, signUp } from "@/function/cognito";
+import { signUp } from "@/function/cognito";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -15,9 +15,12 @@ export default function SignUp () {
   // execute
   const executeSignUp = async(e) => {
     e.preventDefault();
-    console.log(email, password, nickname, profile);
-    const result = await signUp(email, password, nickname, profile);
-    console.log("結果", result);
+    try {
+      const result = await signUp(email, password, nickname, profile);
+      if (result) router.push("/admin/confirm");
+    } catch (err) {
+      console.error(error)
+    }
   }
   // set
   const changeVal = (e) => {
