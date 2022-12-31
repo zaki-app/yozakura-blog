@@ -1,4 +1,4 @@
-import ContentsWrapper from "@components/ContentsWrapper";
+import ContentsWrapper from "@/components/ContentsWrapper";
 
 export default function ArticleId () {
   return (
