@@ -5,7 +5,7 @@ import Link from "next/link";
 import ContentsWrapper from "./ContentsWrapper";
 
 export default function Test () {
-  console.log("環境変数", process.env.COGNITO_REGION);
+  // console.log("環境変数", process.env.COGNITO_REGION);
   const [posts, setPosts] = useState([]);
   // axios
   // useEffect(() => {
