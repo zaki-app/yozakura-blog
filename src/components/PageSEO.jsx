@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { config } from "@config/site.config";
+import { config } from "@/config/site.config";
 
 export default function PageSEO (props) {
-  console.log(props);
   const { title } = props;
   return (
     <Head>
