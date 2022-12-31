@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        - echo "NEXT_PUBLIC_COGNITO_REGION=$NEXT_PUBLIC_COGNITO_REGION" >> .env
+        - echo "NEXT_PUBLIC_COGNITO_USER_POOLS_ID=$NEXT_PUBLIC_COGNITO_USER_POOLS_ID" >> .env
+        - echo "NEXT_PUBLIC_COGNITO_WEB_CLIENT_ID=$NEXT_PUBLIC_COGNITO_WEB_CLIENT_ID" >> .env
+        - yarn run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
