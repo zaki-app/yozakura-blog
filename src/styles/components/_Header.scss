@@ -1,0 +1,17 @@
+.header {
+  padding: 1rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__title {
+    font-size: 1.3rem;
+  }
+  &__lists {
+    display: flex;
+    font-weight: bold;
+    font-size: 1.1rem;
+    p {
+      margin-left: 1rem;
+    }
+  }
+}

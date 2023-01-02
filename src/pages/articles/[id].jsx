@@ -6,14 +6,16 @@ import { useEffect, useState } from "react";
 export default function ArticleId () {
   const router = useRouter();
   const [articleIds, setArticleIds] = useState({});
+  console.log("パス", router.query.id);
 
   useEffect(() => {
     (async () => {
+      console.log("呼ばれるか？", router.query.id);
       const response = await getArticleId(router.query.id);
       setArticleIds(response);
       console.log("ブラウザ側レスポンス", response);
     })();
-  }, []);
+  }, [router.isReady, router.query.id]);
 
   return (
     <ContentsWrapper>

@@ -1,8 +1,9 @@
 import { getArticles } from "@/function/axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 
-export default function Articles () {
+export default function ArticleCard () {
   const [ articles, setArticles ] = useState([]);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Articles () {
   return (
     <>
       {articles.map(article => (
-        <Link href={`/articles/${article.articleId}`} key={article.articleId}>
+        <Link href={`/articles/${article.articleId}`} key={article.articleId} >
           <p>{article.image}</p>
           <p>{article.title}</p>
           <p>{article.category}</p>
