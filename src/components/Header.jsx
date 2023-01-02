@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 
 export default function Header () {
   const router = useRouter();
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
+  const [signOutText, setSignOutText] = useState("サインアウト");
 
   useEffect(() => {
     currentAuthUser().then(async(res) => {
       const idToken = await getCurrentUserIdToken();
-      if (idToken) setToken(idToken)
+      if (idToken) {
+        setToken(idToken)
+      }
     });
   }, []);
 
@@ -20,6 +23,7 @@ export default function Header () {
     try {
       const result = await signOut();
       if (result) router.push("/");
+      setSignOutText("")
     } catch (err) {
       console.error(err)
     }
@@ -43,7 +47,7 @@ export default function Header () {
               )
             }
           })}
-          {token ? <p onClick={executeSignOut}>サインアウト</p> : null}
+          {token ? <p onClick={executeSignOut}>{signOutText}</p> : null}
         </div>
       </div>
     </header>

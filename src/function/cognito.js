@@ -1,7 +1,4 @@
 import { Auth } from "aws-amplify";
-import { useDispatch } from "react-redux";
-import { addIdToken } from "./slice";
-import store from "./store";
 
 // signup
 export async function signUp (username, password, nickname, profile) {
@@ -57,7 +54,7 @@ export async function signIn (username, password) {
     // グローバルに保存したい
     const { signInUserSession } = user;
     const idToken = signInUserSession.getIdToken().getJwtToken();
-    console.log("取れるか？tokenとれた これをstoreに保存か？", idToken);
+    // console.log("取れるか？tokenとれた これをstoreに保存か？", idToken);
     // store.dispatch(addIdToken({ idToken: idToken }));
     return true;
   } catch (err) {
@@ -78,7 +75,7 @@ export async function signOut () {
   }
 } 
 
-// 認証済ユーザーを検知
+// 認証済ユーザーを取得
 export async function currentAuthUser () {
   try {
     const result = await Auth.currentAuthenticatedUser({
@@ -94,6 +91,7 @@ export async function currentAuthUser () {
 // idToken取得
 export async function getCurrentUserIdToken () {
   const result = await Auth.currentSession();
-  const idToken = result.getIdToken().getJwtToken(); 
+  const idToken = result.getIdToken().getJwtToken();
+  console.log(idToken);
   return idToken;
 }

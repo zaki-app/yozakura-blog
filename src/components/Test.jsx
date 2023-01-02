@@ -6,7 +6,7 @@ import ContentsWrapper from "./ContentsWrapper";
 
 export default function Test () {
   const [posts, setPosts] = useState([]);
-  axios
+
   useEffect(() => {
     axios.get("https://jh5icvweg2.execute-api.ap-northeast-1.amazonaws.com/dev/posts")
       .then(res => {
