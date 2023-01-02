@@ -1,7 +1,6 @@
 import { Amplify } from "aws-amplify";
 import Header from '@/components/Header';
-import { Provider } from "react-redux";
-import store from "@/function/store";
+import Footer from "@/components/Footer";
 
 import '../styles/globals.scss';
 
@@ -14,10 +13,9 @@ Amplify.configure({
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Provider store={store}>
-        <Header />
-        <Component {...pageProps} />
-      </Provider>
+      <Header />
+      <Component {...pageProps} />
+      <Footer />
     </>
   )
 }
