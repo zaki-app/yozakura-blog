@@ -1,7 +1,34 @@
 import { config } from "@/config/site.config";
+import { currentAuthUser, getCurrentUserIdToken, signOut } from "@/function/cognito";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Header () {
+  const router = useRouter();
+  const [token, setToken] = useState("");
+  const [signOutText, setSignOutText] = useState("サインアウト");
+
+  useEffect(() => {
+    currentAuthUser().then(async(res) => {
+      const idToken = await getCurrentUserIdToken();
+      if (idToken) {
+        setToken(idToken)
+      }
+    });
+  }, []);
+
+  async function executeSignOut (e) {
+    e.preventDefault();
+    try {
+      const result = await signOut();
+      if (result) router.push("/");
+      setSignOutText("")
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <header>
       <div className="header">
@@ -20,6 +47,7 @@ export default function Header () {
               )
             }
           })}
+          {token ? <p onClick={executeSignOut}>{signOutText}</p> : null}
         </div>
       </div>
     </header>
