@@ -64,3 +64,29 @@ export async function createArticle (params) {
   })
   return result;
 }
+
+// update 
+export async function updateArticle (id, params) {
+  const instance = await axiosInstance("PUT");
+  const result = instance.put(`/article/${id}`, params).then(res => {
+    console.log(`${params} update Success.. id = ${id}`, res);
+    return res.data.data;
+  }).catch(err => {
+    console.error("update error...", err);
+    return err;
+  })
+  return result;
+}
+
+// delete
+export async function deleteArticle (id) {
+  const instance = await axiosInstance("DELETE");
+  const result = instance.delete(`/article/${id}`).then(res => {
+    console.log(`delete Success... id= ${id}`, res);
+    return res
+  }).catch(err => {
+    console.error("delete error...", err);
+    return err;
+  })
+  return result;
+}
