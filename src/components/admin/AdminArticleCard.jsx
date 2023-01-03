@@ -15,7 +15,9 @@ export default function AdminArticleCard () {
 
   // 削除
   async function deleteArticleBtn (id) {
-    console.log(id);
+    const result = confirm("本当に削除しますか？");
+    if (!result) return;
+    
     const response = await deleteArticle(id);
     console.log("削除状況", response);
   }

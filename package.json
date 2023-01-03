@@ -1,7 +1,9 @@
 {
   "name": "yozakura-blog",
+  "description": "Yozakura blog is a personal technical blog",
   "version": "0.1.0",
   "private": true,
+  "author": "Yozakura",
   "scripts": {
     "dev": "next dev -p 5555",
     "build": "next build",
@@ -15,12 +17,14 @@
     "axios": "^1.2.2",
     "eslint": "8.30.0",
     "eslint-config-next": "13.1.1",
+    "marked": "^4.2.5",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5"
   },
   "devDependencies": {
+    "markdown-it": "^13.0.1",
     "sass": "^1.57.1"
   }
 }
