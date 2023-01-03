@@ -1,7 +1,7 @@
 import ContentsWrapper from "@/components/ContentsWrapper";
 import UseRequireLogin from "@/function/hooks/useRequireLogin";
-import ArticleCard from "@/components/articles/ArticleCard";
 import Link from "next/link";
+import AdminArticleCard from "@/components/admin/AdminArticleCard";
 
 export default function Articles () {
   UseRequireLogin();
@@ -15,7 +15,7 @@ export default function Articles () {
           新規作成
         </Link>
       </button>
-      <ArticleCard />
+      <AdminArticleCard />
     </ContentsWrapper>
   )
 }
