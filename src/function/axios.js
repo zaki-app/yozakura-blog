@@ -57,7 +57,7 @@ export async function createArticle (params) {
   const instance = await axiosInstance("POST");
   const result = instance.post(`/article`, params).then(res => {
     console.log(`${params} create Success`, res);
-    return res.data.data;
+    return res.data;
   }).catch(err => {
     console.error("create error...", err);
     return err;

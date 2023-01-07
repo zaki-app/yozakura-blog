@@ -34,5 +34,9 @@ yarn-error.log*
 # 追加
 doc
 .env*
-./src/pages/admin/signup.jsx
+signup.jsx
 ./src/pages/admin/confirm.jsx
+test*
+Test.jsx
+public/testImage
+src/function/markdown/test/
