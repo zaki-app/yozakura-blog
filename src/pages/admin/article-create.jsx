@@ -7,11 +7,7 @@ import CreateMarkdown from "@/components/admin/CreateMarkdown";
 export default function ArticleCreate () {
   UseRequireLogin();
 
-  // state
-  const [image, setImage] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [contents, setContents] = useState("");
+
 
   // create
   async function create (e) {
@@ -46,30 +42,6 @@ export default function ArticleCreate () {
       <h1>新規作成</h1>
       <p>マークダウンをかけるように</p>
       <CreateMarkdown />
-      <br />
-      <form onSubmit={create}>
-        <label>タイトル</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={changeVal}
-        />  
-        <label>カテゴリー</label>
-        <input
-          type="text"
-          name="category"
-          value={category}
-          onChange={changeVal}
-        />  
-        <label>カテゴリー</label>
-        <textarea
-          name="contents"
-          value={contents}
-          onChange={changeVal}
-        />
-        <button type="submit">保存</button>
-      </form>
     </ContentsWrapper>
   )
 }

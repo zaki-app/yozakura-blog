@@ -21,7 +21,8 @@ export default function ArticleId () {
     <ContentsWrapper>
       <h2>{articleIds.title}</h2>
       <p>{articleIds.category}</p>
-      <p>{articleIds.contents}</p>
+      {/* <p>{articleIds.contents}</p> */}
+      <div dangerouslySetInnerHTML={{ __html: articleIds.contents }}></div>
       <p>{articleIds.createdAt}</p>
     </ContentsWrapper>
   )
