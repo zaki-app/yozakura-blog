@@ -11,9 +11,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.245.0",
     "@next/font": "13.1.1",
     "@reduxjs/toolkit": "^1.9.1",
     "aws-amplify": "^5.0.8",
+    "aws-sdk": "^2.1290.0",
     "axios": "^1.2.2",
     "dompurify": "^2.4.1",
     "eslint": "8.30.0",

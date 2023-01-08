@@ -9,14 +9,14 @@ export default function Header () {
   const [token, setToken] = useState("");
   const [signOutText, setSignOutText] = useState("サインアウト");
 
-  // useEffect(() => {
-  //   currentAuthUser().then(async(res) => {
-  //     const idToken = await getCurrentUserIdToken();
-  //     if (idToken) {
-  //       setToken(idToken)
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    currentAuthUser().then(async(res) => {
+      const idToken = await getCurrentUserIdToken();
+      if (idToken) {
+        setToken(idToken)
+      }
+    });
+  }, []);
 
   async function executeSignOut (e) {
     e.preventDefault();
@@ -46,7 +46,7 @@ export default function Header () {
             )
           }
         })}
-        {/* {token ? <p onClick={executeSignOut}>{signOutText}</p> : null} */}
+        {token ? <p onClick={executeSignOut}>{signOutText}</p> : null}
       </div>
     </header>
   )
