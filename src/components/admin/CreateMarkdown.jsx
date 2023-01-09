@@ -1,24 +1,40 @@
 import { createArticle } from "@/function/axios";
+import { getCurrentUserNickname } from "@/function/cognito";
 import { changeHtml } from "@/function/markdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CreateMarkdown () {
   // state
-  const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [contents, setContents] = useState("");
   const [markdownContents, setMarkdownContents] = useState([]);
+  const [isPublished, setIsPublished] = useState(false);
+  const [nickname, setNickname] = useState("");
 
+  // toggle
+  function togglePublished () {
+    setIsPublished(!isPublished);
+  }
+
+  // get user nickname
+  useEffect(() => {
+    (async () => {
+      const user = await getCurrentUserNickname();
+      setNickname(user.nickname);
+    })();
+  }, [])
+  
   // create
   async function create (e) {
     e.preventDefault();
-    console.log("save data", image, title, category, contents, markdownContents)
+    console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
-      image: image,
       category: category,
       contents: markdownContents,
+      isPublished: isPublished,
+      nickname: nickname
     }
     const response = await createArticle(params);
     console.log("結果", response);
@@ -31,10 +47,10 @@ export default function CreateMarkdown () {
     const name = e.target.name;
     if (name === "title") {
       setTitle(val);
-    } else if (name === "image") {
-      setImage(val);
     } else if (name === "category") {
       setCategory(val);
+    } else if (name === "isPublished") {
+      setIsPublished(val);
     } else if (name === "contents") {
       setContents(val);
       const result = changeHtml(val);
@@ -59,20 +75,11 @@ export default function CreateMarkdown () {
           <input
             type="text"
             name="category"
-            placeholder="カテゴリー"
+            placeholder="カテゴリー セレクトボックスにする"
             value={category}
             onChange={changeVal}
           />  
-        </div>        
-        <div className="create__image">
-          <input
-              type="text"
-              name="image"
-              placeholder="画像"
-              value={image}
-              onChange={changeVal}
-            />
-        </div>        
+        </div>     
         <div className="create__contents">
           <textarea 
             type="text"
@@ -81,6 +88,10 @@ export default function CreateMarkdown () {
             value={contents}
             onChange={changeVal}
           />
+        </div>
+        <div className="create__toggle">
+          <button onClick={togglePublished}>公開する</button>
+          <div dangerouslySetInnerHTML={{ __html: isPublished }}></div>
         </div>
         <button onClick={create}>保存</button>
       </div>

@@ -95,3 +95,10 @@ export async function getCurrentUserIdToken () {
   console.log(idToken);
   return idToken;
 }
+
+// nickname取得
+export async function getCurrentUserNickname () {
+  const result = await Auth.currentAuthenticatedUser();
+  if (!result) "no login";
+  return result.attributes;
+}
