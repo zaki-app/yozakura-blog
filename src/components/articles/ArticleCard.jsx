@@ -13,10 +13,6 @@ export default function ArticleCard () {
   }, []);
 
   return (
-    <>
-    <div className="articles-title">
-      Next.jsの記事一覧  &#x2935;&#65039;
-    </div>
     <div className="articles-flex">
       {articles.map(article => (
         <Link href={`/articles/${article.articleId}`} key={article.articleId}>
@@ -28,6 +24,5 @@ export default function ArticleCard () {
         </Link>
       ))}
     </div>
-    </>
   )
 }
