@@ -7,7 +7,6 @@ export default function Home() {
     <>
       <PageSEO title="トップページ" />
       <ContentsWrapper>
-        <h1>最初のページです</h1>
         <ArticleCard />
       </ContentsWrapper>
     </>

@@ -14,12 +14,20 @@ export default function ArticleCard () {
 
   return (
     <>
+    <div className="articles-title">
+      Next.jsの記事一覧  &#x2935;&#65039;
+    </div>
+    <div className="articles-flex">
       {articles.map(article => (
         <Link href={`/articles/${article.articleId}`} key={article.articleId}>
-          <p>{article.title}</p>
-          <p>{article.category}</p>
+          <div className="article-card">
+            <h2 className="article-card__title">📝  {article.title}</h2>
+            <p className="article-card__createdAt">{article.createdAt}</p>
+            <p className="article-card__category">{article.category}</p>
+          </div>
         </Link>
       ))}
+    </div>
     </>
   )
 }
