@@ -2,7 +2,6 @@ import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import DOMPurify from "dompurify";
 
 export async function getS3CategoryImage (category) {
-  console.log("渡ってきたカテゴリ", category);
   const REGION = process.env.NEXT_PUBLIC_COGNITO_REGION;
   const CREDENTIALS = {
     accessKeyId: process.env.NEXT_PUBLIC_ARTICLE_ACCESS_KEY_ID,
@@ -23,7 +22,8 @@ export async function getS3CategoryImage (category) {
   try {
     // get data
     const data = await s3Client.send(new GetObjectCommand(bucketParams));
-    return data.Body.transformToString();
+    const result = await data.Body?.transformToString();
+    return result;
   } catch (err) {
     console.error("s3 get error", err);
   }

@@ -3,29 +3,28 @@
   flex-wrap: wrap;
   justify-content: center;
   .article-card {
-    width: 320px;
-    height: 130px;
+    width: 200px;
+    height: 120px;
     margin: 0 1.5rem 1.5rem 0;
     background: var(--base-article-card-bg);
-    padding: 1.7rem 1rem;
+    padding: 1rem;
     border-radius: 15px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 80px 1fr;
     grid-template-areas: 
                   "title title"
                   "createdAt category";
     &__title {
       grid-area: title;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
     &__createdAt {
-      // background: skyblue;
+      align-items: center;
       grid-area: createdAt;
     }
     &__category {
-      // background: bisque;
       grid-area: category;
       text-align: right;
     }
