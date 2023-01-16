@@ -24,9 +24,7 @@ export default function ArticleId () {
   }
   // 画像取得
   async function getImage() {
-    console.log("カテゴリ", category);
     const result = await getS3CategoryImage(category);
-    // console.log("S3の方です", result);
     setCategoryImg(result);
   }
 
