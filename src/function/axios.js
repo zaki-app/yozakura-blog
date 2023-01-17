@@ -90,3 +90,15 @@ export async function deleteArticle (id) {
   })
   return result;
 }
+
+// category
+export async function CategorySearch (category) {
+  const instance = await axiosInstance("GET");
+  const result = instance.get(`/category/${category}`).then(res => {
+    console.log("category get!!", res);
+    return res;
+  }).catch(err => {
+    console.error("category error...", err);
+  })
+  return result;
+}

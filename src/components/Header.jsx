@@ -33,7 +33,7 @@ export default function Header () {
     <header className="header">
       <div className="header__title">
         <Link href={"/"}>
-          <h1>{ config.siteTitle.title }</h1>
+          <h1>&#127800;</h1>
         </Link>
       </div>
       <div className="header__lists">
