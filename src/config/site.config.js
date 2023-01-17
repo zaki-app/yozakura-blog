@@ -6,7 +6,7 @@ export const config = {
     description: "Yozakura Blog"
   },
   siteTitle: {
-    title: "🌸",
+    title: "&#127800;",
   },
   ogp: {
     property: "og:title",
@@ -21,5 +21,8 @@ export const config = {
       title: "Profile",
       href: "/profile"
     }
-  ]
+  ],
+  footer: {
+    title: "©︎ 2023 Yozakura Blog"
+  }
 }

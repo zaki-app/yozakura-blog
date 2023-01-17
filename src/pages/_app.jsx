@@ -1,6 +1,7 @@
 import { Amplify } from "aws-amplify";
 import Header from '@/components/Header';
 import Footer from "@/components/Footer";
+import { RecoilRoot } from "recoil";
 
 import '../styles/globals.scss';
 
@@ -12,10 +13,10 @@ Amplify.configure({
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <RecoilRoot>
       <Header />
       <Component {...pageProps} />
       <Footer />
-    </>
+    </RecoilRoot>
   )
 }
