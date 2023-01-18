@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { centerState } from "@/function/atom/Atom";
 import { CategorySearch } from "@/function/axios";
+import { newDisplayName } from "@/function/categoryName";
+import ArticleCard from '@/components/articles/ArticleCard';
 
 export default function CategoryIcon () {
   const categories = useRecoilValue(centerState);
-  const [categoryImg, setCategoryImg] = useState([]);
+  const [categoryItems, setCategoryItems] = useState([]);
 
   // 投稿済カテゴリ画像取得
   useEffect(() => {
@@ -16,30 +18,45 @@ export default function CategoryIcon () {
 
   async function getImage () {
     if (categories.length > 0) {
-      const result = await Promise.all(categories.map(async(category) => {
-
+      const categoryItems = await Promise.all(categories.map(async(category) => {
         const svg = await getS3CategoryImage(category);
-        return svg;
+
+        const categoryName = newDisplayName(category);
+        return {name: categoryName, svg: svg};
       }));
-      setCategoryImg(result);
+      
+      // 重複削除
+      const unique = Array.from(
+        new Map(categoryItems.map(category => [category.name, category])).values()
+      );
+      // default add
+      unique.unshift({name: "すべて", svg: "🌸"});
+      console.log(unique);
+      setCategoryItems(unique);
     }
   };
   
   return (
-    <div className="category-image-top">
-      <div className="category-image-top__box">
-        <div className="logo">
-          すべて
-        </div>
-        <div
-          className="logo"
-          dangerouslySetInnerHTML={{ __html: categoryImg }}
-        >
-        </div>
-        <div className="name">
-          Javascriptなど
-        </div>
+    <>
+      <div className="category-image-top">
+        {categoryItems.map(category => (
+          <div 
+            className="category-image-top__box"
+            key={category.name}
+          >
+            <div
+              className="logo"
+              dangerouslySetInnerHTML={{ __html: category.svg }}
+            >
+            </div>
+            <div className="name">
+              {category.name}
+            </div>
+          </div>
+        ))
+        }
       </div>
-    </div>
+      <ArticleCard />
+    </>
   )
 }

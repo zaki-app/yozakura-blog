@@ -18,7 +18,12 @@
 
 /* トップページカテゴリ */
 .category-image-top {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &__box {
+    margin-right: 1rem;
     .logo {
       svg {
         width: 40px;
