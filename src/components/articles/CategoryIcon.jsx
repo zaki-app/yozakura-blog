@@ -9,6 +9,7 @@ import ArticleCard from '@/components/articles/ArticleCard';
 export default function CategoryIcon () {
   const categories = useRecoilValue(centerState);
   const [categoryItems, setCategoryItems] = useState([]);
+  const [category, setCategory] = useState("すべて");
 
   // 投稿済カテゴリ画像取得
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function CategoryIcon () {
         const svg = await getS3CategoryImage(category);
 
         const categoryName = newDisplayName(category);
-        return {name: categoryName, svg: svg};
+        return {name: categoryName, svg: svg, url: category};
       }));
       
       // 重複削除
@@ -30,11 +31,28 @@ export default function CategoryIcon () {
         new Map(categoryItems.map(category => [category.name, category])).values()
       );
       // default add
-      unique.unshift({name: "すべて", svg: "🌸"});
-      console.log(unique);
+      unique.unshift({name: "すべて", svg: "🌸", url: "all" });
+      console.log("ユニーク",unique);
       setCategoryItems(unique);
     }
   };
+
+  // カテゴリーごとに表示切り替え
+  function changeArticle (category) {
+    if (category === "all") {
+      console.log("全て表示します", category);
+    } else {
+      console.log("ここにカテゴリのAPIを呼ぶ処理を書きます", category);
+      getCategoryArticle(category);
+    }
+  }
+
+  // カテゴリごとの記事を取得
+  async function getCategoryArticle(category) {
+    const response = await CategorySearch(category);
+    console.log("カテゴリごと", response);
+    setCategory(category);
+  }
   
   return (
     <>
@@ -43,6 +61,7 @@ export default function CategoryIcon () {
           <div 
             className="category-image-top__box"
             key={category.name}
+            onClick={() => changeArticle(category.url)}
           >
             <div
               className="logo"
@@ -55,6 +74,9 @@ export default function CategoryIcon () {
           </div>
         ))
         }
+      </div>
+      <div className="article-title">
+        {category}の記事⬇️
       </div>
       <ArticleCard />
     </>

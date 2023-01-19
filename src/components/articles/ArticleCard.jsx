@@ -31,9 +31,9 @@ export default function ArticleCard () {
             <div className="article-card">
               <h2 className="article-card__title">&#128220;　{article.title}</h2>
               <p className="article-card__createdAt">{article.createdAt}</p>
-              <div className="article-card__category">
+              {/* <div className="article-card__category">
                 <CategoryBlock category={article.category} />
-              </div>
+              </div> */}
             </div>
           </Link>
         ))}
