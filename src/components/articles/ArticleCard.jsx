@@ -1,7 +1,6 @@
 import { CategorySearch, getArticles } from "@/function/axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CategoryBlock } from "@/components/articles/CategoryBlock";
 import { useRecoilState } from "recoil";
 import { centerState } from "@/function/atom/Atom";
 
@@ -15,7 +14,6 @@ export default function ArticleCard (props) {
   }, [props.select]);
 
   async function getArticlesPublic () {
-    console.log("カテゴリいつ渡される？？", props.select);
     let response;
     if (props.select === "all") {
       response = await getArticles();
@@ -27,14 +25,19 @@ export default function ArticleCard (props) {
     }
 
     setArticles(response);
-    console.log("現在のレスポンス", response)
   };
 
   return (
     <>
       <div className="articles-flex">
         {articles.map(article => (
-          <Link href={`/articles/${article.articleId}`} key={article.articleId}>
+          <Link 
+            href={{ 
+              pathname: `/articles/${article.articleId}`, 
+              query: {id: article.articleId, category: article.category}
+            }}
+            key={article.articleId}
+          >
             <div className="article-card">
               <h2 className="article-card__title">&#128220;　{article.title}</h2>
               <p className="article-card__createdAt">{article.createdAt}</p>
@@ -48,3 +51,15 @@ export default function ArticleCard (props) {
     </>
   )
 }
+
+// export const getStaticProps = async(context) => {
+//   console.log("hello", context);
+
+//   return {
+//     isrData: {
+//       msg: "ISRで実験中です", 
+//       now: new Date().toLocaleString()
+//     },
+//     revalidate: 5
+//   }
+// }

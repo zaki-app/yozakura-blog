@@ -12,7 +12,7 @@ export const newDisplayName = (category) => {
       result = "Next.js";
       break;
     default:
-      result = "まだ決まってません";
+      result = "すべて";
   }
   
   return result;

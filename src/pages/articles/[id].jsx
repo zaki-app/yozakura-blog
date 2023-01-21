@@ -5,37 +5,45 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CategoryImageArticle } from "@/components/articles/CategoryImage";
 
-export default function ArticleId () {
+export default function ArticleId ({msg}) {
+  console.log("get server", msg);
   const router = useRouter();
-  const [articleIds, setArticleIds] = useState({});
+
+  const [article, setArticle] = useState([]);
   const [categoryImg, setCategoryImg] = useState("");
-  const [category, setCategory] = useState("");
 
   useEffect(() => {
     getArticle();
-    getImage();
-  }, [router.isReady, router.query.id, category]);
+  }, [router.query.id]);
 
   // 記事取得
   async function getArticle() {
-    const response = await getArticleId(router.query.id);
-    setArticleIds(response);
-    setCategory(response.category);
-  }
-  // 画像取得
-  async function getImage() {
-    const result = await getS3CategoryImage(category);
-    setCategoryImg(result);
+    if (router.query.id) {
+      const response = await getArticleId(router.query.id);
+      console.log("レスポンス", response)
+      setArticle(response);
+      const svg = await getS3CategoryImage(router.query.category);
+      setCategoryImg(svg);
+    }
   }
 
   return (
     <ContentsWrapper>
-      <h2>{articleIds.title}</h2>
+      <h1>{article.title}</h1>
+      <p>{article.nickname}が投稿しました</p>
       <CategoryImageArticle>
         <div dangerouslySetInnerHTML={{ __html: categoryImg }}></div>
       </CategoryImageArticle>
-      <div dangerouslySetInnerHTML={{ __html: articleIds.contents }}></div>
-      <p>{articleIds.createdAt}</p>
+      <div dangerouslySetInnerHTML={{ __html: article.contents }} ></div>
+      <p>{article.createdAt}</p>
     </ContentsWrapper>
   )
+}
+
+export const getServerSideProps = async (context) => {
+  console.log("ちゃんと入るか？", context);
+  
+  return {
+    props: { msg: "hello" }
+  }
 }
