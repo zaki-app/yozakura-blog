@@ -1,39 +1,24 @@
-import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { centerState } from "@/function/atom/Atom";
 import { newDisplayName } from "@/function/categoryName";
 import ArticleCard from '@/components/articles/ArticleCard';
+import ContentsWrapper from "../ContentsWrapper";
 
-export default function CategoryIcon () {
+export default function CategoryIcon ({articles}) {
+  console.log("データが全部入ってる", articles.categoryItems);
+
   const categories = useRecoilValue(centerState);
   const [categoryItems, setCategoryItems] = useState([]);
   const [category, setCategory] = useState("all");
 
   // 投稿済カテゴリ画像取得
   useEffect(() => {
-    console.log("2回目のcategories更新時のみ")
-    getImage();
+    showIconZone();
   },[categories]);
 
-  async function getImage () {
-    if (categories.length > 0) {
-      const categoryItems = await Promise.all(categories.map(async(category) => {
-        const svg = await getS3CategoryImage(category);
-
-        const categoryName = newDisplayName(category);
-        return {name: categoryName, svg: svg, url: category};
-      }));
-      
-      // 重複削除
-      const unique = Array.from(
-        new Map(categoryItems.map(category => [category.name, category])).values()
-      );
-      // default add
-      unique.unshift({name: "すべて", svg: "🌸", url: "all" });
-      console.log("ユニーク",unique);
-      setCategoryItems(unique);
-    }
+  function showIconZone () {
+    setCategoryItems(articles.categoryItems);
   };
 
   // アイコンクリック時の表示切り替え
@@ -42,7 +27,8 @@ export default function CategoryIcon () {
   }
   
   return (
-    <>
+    <ContentsWrapper>
+      ISRで表示しようと頑張ってます
       <div className="category-image-top">
         {categoryItems.map(category => (
           <div 
@@ -63,10 +49,9 @@ export default function CategoryIcon () {
         }
       </div>
       <div className="article-title">
-        {category}の記事⬇️
+        {newDisplayName(category)}の記事⬇️
       </div>
-      {category}
       <ArticleCard select={category} />
-    </>
+    </ContentsWrapper>
   )
 }
