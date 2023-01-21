@@ -1,26 +1,33 @@
-import { getArticles } from "@/function/axios";
+import { CategorySearch, getArticles } from "@/function/axios";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoryBlock } from "@/components/articles/CategoryBlock";
 import { useRecoilState } from "recoil";
 import { centerState } from "@/function/atom/Atom";
 
-export default function ArticleCard () {
+// カテゴリクリックごとに表示する記事を変える
+export default function ArticleCard (props) {
   const [ articles, setArticles ] = useState([]);
-  const [ category, setCategory ] = useRecoilState(centerState);
+  const [ _, setCategory ] = useRecoilState(centerState);
 
   useEffect(() => {
     getArticlesPublic();
-  }, []);
+  }, [props.select]);
 
   async function getArticlesPublic () {
-    const response = await getArticles();
-    setArticles(response);
-    // recoil
-    if (response) {
+    console.log("カテゴリいつ渡される？？", props.select);
+    let response;
+    if (props.select === "all") {
+      response = await getArticles();
+      // recoil
       const center = response.map(res => res.category);
-      setCategory(center);
+      setCategory(center)
+    } else {
+      response = await CategorySearch(props.select);
     }
+
+    setArticles(response);
+    console.log("現在のレスポンス", response)
   };
 
   return (
