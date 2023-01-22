@@ -7,8 +7,6 @@ import CreateMarkdown from "@/components/admin/CreateMarkdown";
 export default function ArticleCreate () {
   UseRequireLogin();
 
-
-
   // create
   async function create (e) {
     e.preventDefault();    
@@ -40,7 +38,6 @@ export default function ArticleCreate () {
   return (
     <ContentsWrapper>
       <h1>新規作成</h1>
-      <p>マークダウンをかけるように</p>
       <CreateMarkdown />
     </ContentsWrapper>
   )
