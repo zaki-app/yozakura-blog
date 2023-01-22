@@ -28,15 +28,15 @@ export const getStaticPaths = async () => {
       }
     }
   })
-
+  console.log("Pathsです", paths);
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
 export const getStaticProps = async ({params}) => {
-  console.log("getStaticPropsです", params);
+  console.log("getStaticPropsです", params.id);
   const article = await getArticleId(params.id);
   const svg = await getS3CategoryImage(article.category);
   article.svg = svg;
@@ -45,6 +45,6 @@ export const getStaticProps = async ({params}) => {
     props: { 
       article: article
     },
-    revalidate: 10
+    // revalidate: 10
   }
 }
