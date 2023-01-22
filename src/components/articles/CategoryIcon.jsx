@@ -6,7 +6,6 @@ import ArticleCard from '@/components/articles/ArticleCard';
 import ContentsWrapper from "../ContentsWrapper";
 
 export default function CategoryIcon ({articles}) {
-  console.log("データが全部入ってる", articles.categoryItems);
 
   const categories = useRecoilValue(centerState);
   const [categoryItems, setCategoryItems] = useState([]);

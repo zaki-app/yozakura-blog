@@ -6,6 +6,8 @@ import { centerState } from "@/function/atom/Atom";
 
 // カテゴリクリックごとに表示する記事を変える
 export default function ArticleCard (props) {
+  console.log(props)
+
   const [ articles, setArticles ] = useState([]);
   const [ _, setCategory ] = useRecoilState(centerState);
 
@@ -34,8 +36,9 @@ export default function ArticleCard (props) {
           <Link 
             href={{ 
               pathname: `/articles/${article.articleId}`, 
-              query: {id: article.articleId, category: article.category}
+              query: {id: article.articleId, category: article.category }
             }}
+            as={`/articles/${article.articleId}`}
             key={article.articleId}
           >
             <div className="article-card">
@@ -51,15 +54,3 @@ export default function ArticleCard (props) {
     </>
   )
 }
-
-// export const getStaticProps = async(context) => {
-//   console.log("hello", context);
-
-//   return {
-//     isrData: {
-//       msg: "ISRで実験中です", 
-//       now: new Date().toLocaleString()
-//     },
-//     revalidate: 5
-//   }
-// }

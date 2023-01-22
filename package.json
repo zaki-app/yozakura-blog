@@ -8,7 +8,8 @@
     "dev": "next dev -p 5555",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-start": "next build && next start"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.245.0",
