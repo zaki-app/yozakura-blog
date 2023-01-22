@@ -42,6 +42,6 @@ export const getStaticProps = async(context) => {
       categoryItems: uniqueItems,
       now: new Date().toLocaleString(),
     },
-    revalidate: 5 // 新しいリクエストがあってから5秒間は新しいHTMLを生成しない
+    revalidate: 10 // 新しいリクエストがあってから5秒間は新しいHTMLを生成しない
   }
 }

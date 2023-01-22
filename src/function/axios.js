@@ -42,7 +42,7 @@ export async function getArticles () {
 export async function getArticleId (articleId) {
   const instance = await axiosInstance("GET");
   const result = instance.get(`/article/${articleId}`).then(res => {
-    console.log(`${articleId} get Success`, res);
+    console.log(`${articleId} get Success`, res.data);
     return res.data.data;
   }).catch(err => {
     console.error("not id error", err);
