@@ -19,7 +19,7 @@ export default function ArticleId ({article}) {
   )
 }
 
-export const getStaticPaths = async (context, foo) => {
+export const getStaticPaths = async () => {
   const articles = await getArticles();
   const paths = articles.map(article => {
     return {
