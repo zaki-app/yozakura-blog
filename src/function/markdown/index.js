@@ -3,7 +3,12 @@ import DOMPurify from "dompurify";
 import { marked } from "marked";
 
 export function changeHtml (props) {
-  const html = marked(props);
+  marked.setOptions({
+    breaks: true,
+  })
+  const html = marked.parse(props);
+
+  console.log("result markdown", html)
 
   const config = {
     ALLOWED_ATTR: [
@@ -39,10 +44,17 @@ export function changeHtml (props) {
       "tbody",
       "tr",
       "th",
-      "td"
+      "td",
+      ""
     ],
   };
   
   const htmlText = DOMPurify.sanitize(html, config);
+
+  console.log("どうなる？？", htmlText)
   return htmlText;
+}
+
+export function changeBr (props) {
+  return props.replace(/[\n\r]/g, "<br />")
 }
