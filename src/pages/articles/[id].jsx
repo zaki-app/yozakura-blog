@@ -2,6 +2,7 @@ import ContentsWrapper from "@/components/ContentsWrapper";
 import { getArticleId, getArticles } from "@/function/axios";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "@/components/articles/CategoryImage";
+import { changeBr } from "@/function/markdown";
 
 export default function ArticleId ({article}) {
   console.log("props", article);
@@ -11,9 +12,11 @@ export default function ArticleId ({article}) {
       <h1>{article.title}</h1>
       <p>{article.nickname}が投稿しました</p>
       <CategoryImageArticle>
-        <div dangerouslySetInnerHTML={{ __html: article.svg }}></div>
+        <div dangerouslySetInnerHTML={{ __html: article.svg }} />
       </CategoryImageArticle>
-      <div dangerouslySetInnerHTML={{ __html: article.contents }} ></div>
+      <div 
+        className="md-contents"
+        dangerouslySetInnerHTML={{ __html: changeBr(article.contents) }} />
       <p>{article.createdAt}</p>
     </ContentsWrapper>
   )

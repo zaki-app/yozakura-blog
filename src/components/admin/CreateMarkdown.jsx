@@ -40,8 +40,6 @@ export default function CreateMarkdown () {
     console.log("結果", response);
   }
 
-  // change 
-  // set
   function changeVal (e) {
     const val = e.target.value;
     const name = e.target.name;
@@ -60,9 +58,9 @@ export default function CreateMarkdown () {
   }
 
   return (
-    <>
-      <div className="create">
-        <div className="create__title">
+    <div className="create">
+      <div className="create-input">
+        <div className="create-input__title">
           <input
             type="text"
             name="title"
@@ -71,7 +69,7 @@ export default function CreateMarkdown () {
             onChange={changeVal}
           />
         </div>        
-        <div className="create__category">
+        <div className="create-input__category">
           <input
             type="text"
             name="category"
@@ -80,7 +78,7 @@ export default function CreateMarkdown () {
             onChange={changeVal}
           />  
         </div>     
-        <div className="create__contents">
+        <div className="create-input__contents">
           <textarea 
             type="text"
             name="contents"
@@ -89,15 +87,18 @@ export default function CreateMarkdown () {
             onChange={changeVal}
           />
         </div>
-        <div className="create__toggle">
+        <div className="create-input__toggle">
           <button onClick={togglePublished}>公開する</button>
           <div dangerouslySetInnerHTML={{ __html: isPublished }}></div>
         </div>
         <button onClick={create}>保存</button>
       </div>
       <div className="create-preview">
-        <div dangerouslySetInnerHTML={{ __html: markdownContents }} />
+        <div 
+          className="md-contents"
+          dangerouslySetInnerHTML={{ __html: markdownContents }} 
+        />
       </div>
-    </>
+    </div>
   )
 }
