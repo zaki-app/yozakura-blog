@@ -4,11 +4,40 @@ import { marked } from "marked";
 
 export function changeHtml (props) {
   marked.setOptions({
+    renderer: new marked.Renderer(),
+    highlight: function(code, lang) {
+      const hljs = require('highlight.js');
+      const language = hljs.getLanguage(lang) ? lang: 'plaintext';
+      console.log("言語", language);
+      console.log("コード？？", code);
+      return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: 'hljs lang-',
+    pedantic: false,
+    gfm: true,
     breaks: true,
-  })
+    sanitize: false,
+    smartypants: false,
+    xhtml: false
+  });
+  // const renderer = {
+  //   heading(text, level) {
+  //     const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+  //     return `
+  //     <h${level}>
+  //       <a name="${escapedText}" class="anchor" href="#${escapedText}">
+  //         <span class="header-link"></span>
+  //       </a>
+  //         ${text}
+  //     </h${level}>
+  //   `;
+  //   }
+  // }
+  // marked.use({ renderer })
   const html = marked.parse(props);
 
-  console.log("result markdown", html)
+  // console.log("result markdown", html)
 
   const config = {
     ALLOWED_ATTR: [
@@ -51,7 +80,7 @@ export function changeHtml (props) {
   
   const htmlText = DOMPurify.sanitize(html, config);
 
-  console.log("どうなる？？", htmlText)
+  // console.log("どうなる？？", htmlText)
   return htmlText;
 }
 

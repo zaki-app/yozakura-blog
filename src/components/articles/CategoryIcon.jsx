@@ -27,7 +27,6 @@ export default function CategoryIcon ({articles}) {
   
   return (
     <ContentsWrapper>
-      ISRで表示しようと頑張ってます
       <div className="category-image-top">
         {categoryItems.map(category => (
           <div 
