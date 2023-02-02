@@ -11,6 +11,18 @@ export const newDisplayName = (category) => {
     case "nextjs":
       result = "Next.js";
       break;
+    case "nestjs":
+      result = "Nest.js";
+      break;
+    case "git":
+      result = "Git";
+      break;
+    case "test":
+      result = "テスト関係";
+      break;
+    case "other":
+      result = "その他";
+      break;
     default:
       result = "すべて";
   }
