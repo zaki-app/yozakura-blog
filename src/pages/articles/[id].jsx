@@ -16,7 +16,7 @@ export default function ArticleId ({article}) {
       </CategoryImageArticle>
       <div 
         className="md-contents"
-        dangerouslySetInnerHTML={{ __html: changeBr(article.contents) }} />
+        dangerouslySetInnerHTML={{ __html: article.contents }} />
       <p>{article.createdAt}</p>
     </ContentsWrapper>
   )

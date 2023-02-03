@@ -1,25 +1,27 @@
 // marked
 import DOMPurify from "dompurify";
+import hljs from "highlight.js";
 import { marked } from "marked";
 
 export function changeHtml (props) {
-  marked.setOptions({
-    renderer: new marked.Renderer(),
-    highlight: function(code, lang) {
-      const hljs = require('highlight.js');
-      const language = hljs.getLanguage(lang) ? lang: 'plaintext';
-      console.log("言語", language);
-      console.log("コード？？", code);
-      return hljs.highlight(code, { language }).value;
-    },
-    langPrefix: 'hljs lang-',
-    pedantic: false,
-    gfm: true,
-    breaks: true,
-    sanitize: false,
-    smartypants: false,
-    xhtml: false
-  });
+  // marked.setOptions({
+  //   renderer: new marked.Renderer(),
+  //   highlight: function(code, lang) {
+  //     const hljs = require('highlight.js');
+  //     const language = hljs.getLanguage(lang) ? lang: 'plaintext';
+  //     console.log("言語", language);
+  //     console.log("コード？？", code);
+  //     // return hljs.highlight(code, { language }).value;
+  //     return hljs.highlight(code, { language });
+  //   },
+  //   langPrefix: 'hljs lang-',
+  //   pedantic: false,
+  //   gfm: true,
+  //   breaks: true,
+  //   sanitize: false,
+  //   smartypants: false,
+  //   xhtml: false
+  // });
   // const renderer = {
   //   heading(text, level) {
   //     const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
@@ -35,9 +37,20 @@ export function changeHtml (props) {
   //   }
   // }
   // marked.use({ renderer })
+
   const html = marked.parse(props);
 
+  marked.setOptions({
+    langPrefix: "",
+    highlight: function(code, lang) {
+      return hljs.highlightAuto(code, [lang]).value;
+    }
+  })
+
+  console.log("どうだ？？", html)
+  // return html;
   // console.log("result markdown", html)
+  // Atom One Dark
 
   const config = {
     ALLOWED_ATTR: [
@@ -81,9 +94,6 @@ export function changeHtml (props) {
   const htmlText = DOMPurify.sanitize(html, config);
 
   // console.log("どうなる？？", htmlText)
+  // return htmlText;
   return htmlText;
-}
-
-export function changeBr (props) {
-  return props.replace(/[\n\r]/g, "<br />")
 }
