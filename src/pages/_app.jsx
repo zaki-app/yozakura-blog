@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { RecoilRoot } from "recoil";
 
 import '../styles/globals.scss';
+import 'highlight.js/styles/vs2015.css';
 
 Amplify.configure({
   aws_cognito_region: process.env.NEXT_PUBLIC_COGNITO_REGION,
