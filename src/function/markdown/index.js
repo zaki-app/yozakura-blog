@@ -93,7 +93,5 @@ export function changeHtml (props) {
   
   const htmlText = DOMPurify.sanitize(html, config);
 
-  // console.log("どうなる？？", htmlText)
-  // return htmlText;
-  return htmlText;
+  return html;
 }

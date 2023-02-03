@@ -2,7 +2,6 @@ import ContentsWrapper from "@/components/ContentsWrapper";
 import { getArticleId, getArticles } from "@/function/axios";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "@/components/articles/CategoryImage";
-import { changeBr } from "@/function/markdown";
 
 export default function ArticleId ({article}) {
   console.log("props", article);
