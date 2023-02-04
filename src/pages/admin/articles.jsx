@@ -1,7 +1,6 @@
 import ContentsWrapper from "@/components/ContentsWrapper";
 import UseRequireLogin from "@/function/hooks/useRequireLogin";
 import Link from "next/link";
-import AdminArticleCard from "@/components/admin/AdminArticleCard";
 import { getArticles, deleteArticle } from "@/function/axios";
 import CommonButton from "@/components/CommonButton";
 
