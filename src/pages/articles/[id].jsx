@@ -9,15 +9,23 @@ export default function ArticleId ({article}) {
 
   return (
     <ContentsWrapper>
-      <h1>{article.title}</h1>
-      <p>{article.nickname}が投稿しました</p>
-      <CategoryImageArticle>
-        <div dangerouslySetInnerHTML={{ __html: article.svg }} />
-      </CategoryImageArticle>
-      <div 
-        className="md-contents"
-        dangerouslySetInnerHTML={{ __html: changeHtml(article.contents) }} />
-      <p>{article.createdAt}</p>
+      <div className="article-detail">
+        <p className="article-detail__date">{article.createdAt}に作成</p>
+        <div className="article-detail__title">
+          <CategoryImageArticle>
+            <div dangerouslySetInnerHTML={{ __html: article.svg }}/>
+          </CategoryImageArticle>
+          <h1>{article.title}</h1>
+        </div>
+        <div className="article-detail__info">
+          <p>{article.nickname}が投稿しました</p>
+        </div>
+
+        <div 
+          className="md-contents"
+          dangerouslySetInnerHTML={{ __html: changeHtml(article.contents) }}
+        />
+      </div>
     </ContentsWrapper>
   )
 }
