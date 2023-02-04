@@ -8,32 +8,32 @@ export default function ArticleCreate () {
   UseRequireLogin();
 
   // create
-  async function create (e) {
-    e.preventDefault();    
-    const params = {
-      title: title,
-      image: image,
-      category: category,
-      contents: contents,
-    }
-    const response = await createArticle(params);
-    console.log("結果", response);
-  }
+  // async function create (e) {
+  //   e.preventDefault();    
+  //   const params = {
+  //     title: title,
+  //     image: image,
+  //     category: category,
+  //     contents: contents,
+  //   }
+  //   const response = await createArticle(params);
+  //   console.log("結果", response);
+  // }
 
   // set
-  function changeVal (e) {
-    const val = e.target.value;
-    const name = e.target.name;
-    if (name === "title") {
-      setTitle(val);
-    } else if (name === "image") {
-      setImage(val);
-    } else if (name === "category") {
-      setCategory(val);
-    } else if (name === "contents") {
-      setContents(val);
-    }
-  }
+  // function changeVal (e) {
+  //   const val = e.target.value;
+  //   const name = e.target.name;
+  //   if (name === "title") {
+  //     setTitle(val);
+  //   } else if (name === "image") {
+  //     setImage(val);
+  //   } else if (name === "category") {
+  //     setCategory(val);
+  //   } else if (name === "contents") {
+  //     setContents(val);
+  //   }
+  // }
 
   return (
     <CreateMarkdown />

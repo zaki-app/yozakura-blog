@@ -32,7 +32,7 @@ export default function AdminArticleCard () {
               <p>{article.title}</p>
               <p>{article.category}</p>
             </Link>
-            <Link href={`/admin/${article.articleId}`}>
+            <Link href={`/admin/update/${article.articleId}`}>
               <CommonButton text="更新" buttonClass="" />
             </Link>
             <div onClick={() => deleteArticleBtn(article.articleId)}>

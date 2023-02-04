@@ -2,6 +2,7 @@ import ContentsWrapper from "@/components/ContentsWrapper";
 import { getArticleId, getArticles } from "@/function/axios";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "@/components/articles/CategoryImage";
+import { changeHtml } from "@/function/markdown";
 
 export default function ArticleId ({article}) {
   console.log("props", article);
@@ -15,7 +16,7 @@ export default function ArticleId ({article}) {
       </CategoryImageArticle>
       <div 
         className="md-contents"
-        dangerouslySetInnerHTML={{ __html: article.contents }} />
+        dangerouslySetInnerHTML={{ __html: changeHtml(article.contents) }} />
       <p>{article.createdAt}</p>
     </ContentsWrapper>
   )

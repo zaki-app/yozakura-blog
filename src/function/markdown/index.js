@@ -47,7 +47,7 @@ export function changeHtml (props) {
     }
   })
 
-  console.log("どうだ？？", html)
+  // console.log("どうだ？？", html)
   // return html;
   // console.log("result markdown", html)
   // Atom One Dark
@@ -91,7 +91,7 @@ export function changeHtml (props) {
     ],
   };
   
-  const htmlText = DOMPurify.sanitize(html, config);
+  // const htmlText = DOMPurify.sanitize(html, config);
 
   return html;
 }

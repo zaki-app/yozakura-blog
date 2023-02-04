@@ -2,9 +2,11 @@ import ContentsWrapper from "@/components/ContentsWrapper";
 import UseRequireLogin from "@/function/hooks/useRequireLogin";
 import Link from "next/link";
 import AdminArticleCard from "@/components/admin/AdminArticleCard";
+import { getArticles } from "@/function/axios";
 
-export default function Articles () {
+export default function Articles ({articles}) {
   UseRequireLogin();
+  
 
   return (
     <ContentsWrapper>
@@ -15,7 +17,22 @@ export default function Articles () {
           新規作成
         </Link>
       </button>
-      <AdminArticleCard />
+      {/* テーブルエリア */}
+      {articles.map(article => (
+        <div key={article.id}>          
+          <p>{article.nickname}</p>
+        </div>
+      ))}
     </ContentsWrapper>
   )
+}
+
+export async function getServerSideProps() {
+  const articles = await getArticles();
+  console.log("記事たち", articles);
+  return {
+    props: {
+      articles
+    }
+  }
 }
