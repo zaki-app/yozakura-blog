@@ -2,6 +2,10 @@ import { createArticle } from "@/function/axios";
 import { getCurrentUserNickname } from "@/function/cognito";
 import { changeHtml } from "@/function/markdown";
 import { useEffect, useState } from "react";
+import { Autocomplete, Button, Switch, FormGroup, FormControlLabel, TextField, OutlinedInput } from "@mui/material";
+import { autoCategory } from "@/function/markdown/autoCategory";
+import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
+import { CategoryImageArticle } from "../articles/CategoryImage";
 
 export default function CreateMarkdown () {
   // state
@@ -9,8 +13,9 @@ export default function CreateMarkdown () {
   const [category, setCategory] = useState("");
   const [contents, setContents] = useState("");
   const [markdownContents, setMarkdownContents] = useState([]);
-  const [isPublished, setIsPublished] = useState(false);
+  const [isPublished, setIsPublished] = useState(true);
   const [nickname, setNickname] = useState("");
+  const [categoryImg, setCategoryImg] = useState("");
 
   // toggle
   function togglePublished () {
@@ -28,6 +33,7 @@ export default function CreateMarkdown () {
   // create
   async function create (e) {
     e.preventDefault();
+    console.log(category)
     console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
@@ -43,11 +49,7 @@ export default function CreateMarkdown () {
   function changeVal (e) {
     const val = e.target.value;
     const name = e.target.name;
-    if (name === "title") {
-      setTitle(val);
-    } else if (name === "category") {
-      setCategory(val);
-    } else if (name === "isPublished") {
+   if (name === "isPublished") {
       setIsPublished(val);
     } else if (name === "contents") {
       setContents(val);
@@ -57,27 +59,31 @@ export default function CreateMarkdown () {
     }
   }
 
+  // カテゴリ画像を取得
+  async function getSvg(category) {
+    const svg = await getS3CategoryImage(category);
+    setCategoryImg(svg)
+  }
+
   return (
     <div className="create">
       <div className="create-input">
-        <div className="create-input__title">
-          <input
-            type="text"
-            name="title"
-            placeholder="タイトル"
-            value={title}
-            onChange={changeVal}
-          />
-        </div>        
-        <div className="create-input__category">
-          <input
-            type="text"
-            name="category"
-            placeholder="カテゴリー セレクトボックスにする"
-            value={category}
-            onChange={changeVal}
-          />  
-        </div>     
+      <FormGroup>
+        <TextField
+          sx={{ mb: 1 }}
+          placeholder="タイトル"
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <Autocomplete
+          fullWidth
+          options={autoCategory}
+          renderInput={params => <TextField {...params} placeholder="カテゴリ" />}
+          onChange={(event, value) => {
+            setCategory(value.category);
+            getSvg(value.category);
+          }}
+        />
+        カテゴリ{ category }
         <div className="create-input__contents">
           <textarea 
             type="text"
@@ -87,13 +93,29 @@ export default function CreateMarkdown () {
             onChange={changeVal}
           />
         </div>
-        <div className="create-input__toggle">
-          <button onClick={togglePublished}>公開する</button>
-          <div dangerouslySetInnerHTML={{ __html: isPublished }}></div>
-        </div>
-        <button onClick={create}>保存</button>
+        <FormControlLabel
+          control={
+            <Switch 
+              onClick={togglePublished}
+              defaultChecked
+            />
+          }
+          label={ isPublished ? "公開" : "非公開" }
+        />
+        <div dangerouslySetInnerHTML={{ __html: isPublished }}></div>
+        <Button 
+          onClick={create}
+          variant="contained"
+        >
+          { isPublished ?  "保存" : "一時保存" }
+        </Button>
+      </FormGroup>
       </div>
       <div className="create-preview">
+        <h1>{title}</h1>
+        <CategoryImageArticle>
+          <div dangerouslySetInnerHTML={{ __html: categoryImg }} />
+        </CategoryImageArticle>
         <div 
           className="md-contents"
           dangerouslySetInnerHTML={{ __html: markdownContents }} 

@@ -44,13 +44,9 @@ export function changeHtml (props) {
     langPrefix: "",
     highlight: function(code, lang) {
       return hljs.highlightAuto(code, [lang]).value;
-    }
+    },
+    breaks: true,
   })
-
-  // console.log("どうだ？？", html)
-  // return html;
-  // console.log("result markdown", html)
-  // Atom One Dark
 
   const config = {
     ALLOWED_ATTR: [
