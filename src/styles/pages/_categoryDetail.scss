@@ -1,0 +1,24 @@
+.article-detail {
+  margin: 1rem 0;
+  // background: var(--article-detail-bg-color);
+  &__date {
+    margin-bottom: 1rem;
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    h1 {
+      font-size: 1.7rem;
+    }
+  }
+  &__info {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 3rem;
+    align-items: center;
+    p {
+      margin: 0 1rem;
+    }
+  }
+}
