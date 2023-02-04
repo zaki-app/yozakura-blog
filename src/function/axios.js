@@ -67,6 +67,7 @@ export async function createArticle (params) {
 
 // update 
 export async function updateArticle (id, params) {
+  console.log("送ってる情報", params)
   const instance = await axiosInstance("PUT");
   const result = instance.put(`/article/${id}`, params).then(res => {
     console.log(`${params} update Success.. id = ${id}`, res);

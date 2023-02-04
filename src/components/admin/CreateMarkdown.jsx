@@ -32,7 +32,7 @@ export default function CreateMarkdown () {
     const params = {
       title: title,
       category: category,
-      contents: markdownContents,
+      contents: contents,
       isPublished: isPublished,
       nickname: nickname
     }
