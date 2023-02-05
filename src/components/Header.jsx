@@ -3,6 +3,7 @@ import { currentAuthUser, getCurrentUserIdToken, signOut } from "@/function/cogn
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Header () {
   const router = useRouter();
@@ -33,7 +34,14 @@ export default function Header () {
     <header className="header">
       <div className="header__title">
         <Link href={"/"}>
-          <h1>&#127800;</h1>
+          <h1>
+            <Image 
+              src={config.siteIcon}
+              alt="サイトロゴ"
+              width={50}
+              height={50}
+            />
+          </h1>
         </Link>
       </div>
       <div className="header__lists">

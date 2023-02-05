@@ -13,11 +13,12 @@
     border-radius: 15px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     display: grid;
-    grid-template-columns: 4.5rem 1fr 1fr;
-    grid-template-rows: 80px 1fr;
-    grid-template-areas: 
-                  "logo title title"
-                  "logo createdAt category";
+    grid-template-columns: 4.5rem 1fr;
+    grid-template-rows: 1rem 1fr 2rem;
+    grid-template-areas:
+                  "logo createdAt" 
+                  "logo title"
+                  "logo category";
     &__logo {
       grid-area: logo;
       // background: #ccc;
@@ -25,10 +26,10 @@
       align-items: center;
       justify-content: center;
       &__emoji {
-        width: 80%;
         background: var(--blue-ara-bg-color);
+        padding: .5rem;
         font-size: 2rem;
-        border-radius: 50%;
+        border-radius: 10px;
         display: flex;
         justify-content: center;
       }
@@ -36,6 +37,8 @@
     &__title {
       grid-area: title;
       font-size: 1.1rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
     }
     &__createdAt {
       align-items: center;
@@ -45,6 +48,7 @@
       font-size: .8rem;
       letter-spacing: 1px;
       font-weight: bold;
+      margin-left: 1rem;
     }
     &__category {
       grid-area: category;
