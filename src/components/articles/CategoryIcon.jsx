@@ -27,31 +27,32 @@ export default function CategoryIcon ({articles}) {
   }
   
   return (
-    <ContentsWrapper>
+    <>
       <div className="category-image-top">
         {categoryItems.map(category => (
           <div 
-            className="category-image-top__box"
-            key={category.name}
-            onClick={() => changeArticle(category.url)}
+          className="category-image-top__box"
+          key={category.name}
+          onClick={() => changeArticle(category.url)}
           >
             <div
               className="logo"
               dangerouslySetInnerHTML={{ __html: category.svg }}
-            >
+              >
             </div>
             <div className="name">
               {category.name}
             </div>
           </div>
-        ))
-        }
+        ))}
       </div>
-      <div className="article-title">
-        <p>{newDisplayName(category)}の記事</p>
-        <ArrowDropDownCircle />
-      </div>
-      <ArticleCard select={category} />
-    </ContentsWrapper>
+      <ContentsWrapper>
+        <div className="article-title">
+          <p>{newDisplayName(category)}の記事</p>
+          <ArrowDropDownCircle />
+        </div>
+        <ArticleCard select={category} />
+      </ContentsWrapper>
+    </>
   )
 }

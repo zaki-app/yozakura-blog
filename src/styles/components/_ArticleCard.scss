@@ -1,23 +1,38 @@
 .articles-flex {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
   @media screen and (max-width: 481px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
   .article-card {
     height: 120px;
-    margin: 0 1.5rem 1.5rem 0;
-    background: var(--base-article-card-bg);
+    background: var(--white-area-bg-color);
     padding: 1rem;
     border-radius: 15px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4.5rem 1fr 1fr;
     grid-template-rows: 80px 1fr;
     grid-template-areas: 
-                  "title title"
-                  "createdAt category";
+                  "logo title title"
+                  "logo createdAt category";
+    &__logo {
+      grid-area: logo;
+      // background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__emoji {
+        width: 80%;
+        background: var(--blue-ara-bg-color);
+        font-size: 2rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+      }
+    }
     &__title {
       grid-area: title;
       font-size: 1.1rem;
@@ -25,10 +40,27 @@
     &__createdAt {
       align-items: center;
       grid-area: createdAt;
+      display: flex;
+      align-items: center;
+      font-size: .8rem;
+      letter-spacing: 1px;
+      font-weight: bold;
     }
     &__category {
       grid-area: category;
-      text-align: right;
+      display: block;
+      width: 5rem;
+      max-width: 6rem;
+      font-size: .8rem;
+      letter-spacing: 1px;
+      font-weight: bold;
+      background: var(--blue-ara-bg-color);
+      color: var(--white-font-color);
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-self: last baseline;
     }
   }
 }
