@@ -33,7 +33,6 @@ export default function CreateMarkdown () {
   // create
   async function create (e) {
     e.preventDefault();
-    console.log(category)
     console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
@@ -116,7 +115,7 @@ export default function CreateMarkdown () {
         <CategoryImageArticle>
           <div dangerouslySetInnerHTML={{ __html: categoryImg }} />
         </CategoryImageArticle>
-        <div 
+        <div
           className="md-contents"
           dangerouslySetInnerHTML={{ __html: markdownContents }} 
         />

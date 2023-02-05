@@ -3,10 +3,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { centerState } from "@/function/atom/Atom";
+import { newDisplayName } from "@/function/categoryName";
 
 // カテゴリクリックごとに表示する記事を変える
 export default function ArticleCard (props) {
-  console.log(props)
+  console.log(props.select)
 
   const [ articles, setArticles ] = useState([]);
   const [ _, setCategory ] = useRecoilState(centerState);
@@ -44,9 +45,6 @@ export default function ArticleCard (props) {
             <div className="article-card">
               <h2 className="article-card__title">&#128220;　{article.title}</h2>
               <p className="article-card__createdAt">{article.createdAt}</p>
-              {/* <div className="article-card__category">
-                <CategoryBlock category={article.category} />
-              </div> */}
             </div>
           </Link>
         ))}

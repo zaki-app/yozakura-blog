@@ -2,13 +2,18 @@
   margin: 1rem 0;
   // background: var(--article-detail-bg-color);
   &__date {
+    display: flex;
     margin-bottom: 1rem;
+    p {
+      margin-left: .5rem;
+    }
   }
   &__title {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
     h1 {
+      margin-left: 1rem;
       font-size: 1.7rem;
     }
   }
@@ -18,7 +23,7 @@
     margin-bottom: 3rem;
     align-items: center;
     p {
-      margin: 0 1rem;
+      margin-left: .5rem;
     }
   }
 }
