@@ -43,8 +43,14 @@ export default function ArticleCard (props) {
             key={article.articleId}
           >
             <div className="article-card">
-              <h2 className="article-card__title">&#128220;　{article.title}</h2>
+              <div className="article-card__logo">
+                <span className="article-card__logo__emoji">&#128220;</span>
+              </div>
+              <h2 className="article-card__title">{article.title}</h2>
               <p className="article-card__createdAt">{article.createdAt}</p>
+              <p className="article-card__category">
+                <span>{newDisplayName(article.category)}</span>
+              </p>
             </div>
           </Link>
         ))}

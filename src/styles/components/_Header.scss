@@ -1,11 +1,11 @@
 .header {
   max-width: 780px;
+  color: #fff;
   margin: 0 auto;
   padding: 1rem 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #8D0000;
   &__title {
     font-size: 1.3rem;
   }
