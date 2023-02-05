@@ -4,6 +4,7 @@ import { centerState } from "@/function/atom/Atom";
 import { newDisplayName } from "@/function/categoryName";
 import ArticleCard from '@/components/articles/ArticleCard';
 import ContentsWrapper from "../ContentsWrapper";
+import {ArrowDropDownCircle} from '@mui/icons-material';
 
 export default function CategoryIcon ({articles}) {
 
@@ -47,7 +48,8 @@ export default function CategoryIcon ({articles}) {
         }
       </div>
       <div className="article-title">
-        {newDisplayName(category)}の記事⬇️
+        <p>{newDisplayName(category)}の記事</p>
+        <ArrowDropDownCircle />
       </div>
       <ArticleCard select={category} />
     </ContentsWrapper>

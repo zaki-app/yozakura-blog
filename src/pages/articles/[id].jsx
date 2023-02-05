@@ -3,6 +3,7 @@ import { getArticleId, getArticles } from "@/function/axios";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "@/components/articles/CategoryImage";
 import { changeHtml } from "@/function/markdown";
+import { History, DriveFileRenameOutline } from '@mui/icons-material';
 
 export default function ArticleId ({article}) {
   console.log("props", article);
@@ -10,7 +11,10 @@ export default function ArticleId ({article}) {
   return (
     <ContentsWrapper>
       <div className="article-detail">
-        <p className="article-detail__date">{article.createdAt}に作成</p>
+        <div className="article-detail__date">
+          <History />
+          <p>{article.createdAt}に作成</p>
+        </div>
         <div className="article-detail__title">
           <CategoryImageArticle>
             <div dangerouslySetInnerHTML={{ __html: article.svg }}/>
@@ -18,6 +22,7 @@ export default function ArticleId ({article}) {
           <h1>{article.title}</h1>
         </div>
         <div className="article-detail__info">
+          <DriveFileRenameOutline />
           <p>{article.nickname}が投稿しました</p>
         </div>
 

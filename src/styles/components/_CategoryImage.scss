@@ -22,17 +22,48 @@
 
 /* トップページカテゴリ */
 .category-image-top {
+  // border-top: 1px solid #8D0000;
+  border-bottom: 1px solid #8D0000;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  padding: 1.5rem 0;
   &__box {
     margin-right: 1rem;
     .logo {
       svg {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #313746;
+        border-radius: 50%;
+        background-color: #313746;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
       }
     }
+    .name {
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      font-size: .9rem;
+      color: #313746;
+    }
+  }
+}
+.article-title {
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  color: #fff;
+  background: #8D0000;
+  width: 200px;
+  padding: .8rem 1rem;
+  border-radius: 5px;
+  svg {
+    margin-left: .3rem;
   }
 }
