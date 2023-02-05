@@ -6,6 +6,8 @@ import { Autocomplete, Button, Switch, FormGroup, FormControlLabel, TextField, O
 import { autoCategory } from "@/function/markdown/autoCategory";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "../articles/CategoryImage";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 export default function CreateMarkdown () {
   // state
@@ -16,6 +18,7 @@ export default function CreateMarkdown () {
   const [isPublished, setIsPublished] = useState(true);
   const [nickname, setNickname] = useState("");
   const [categoryImg, setCategoryImg] = useState("");
+  const [emoji, setEmoji] = useState("");
 
   // toggle
   function togglePublished () {
@@ -36,6 +39,7 @@ export default function CreateMarkdown () {
     console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
+      emoji: emoji,
       category: category,
       contents: contents,
       isPublished: isPublished,
@@ -73,6 +77,7 @@ export default function CreateMarkdown () {
           placeholder="タイトル"
           onChange={(event) => setTitle(event.target.value)}
         />
+        <Picker data={data} onEmojiSelect={(emoji) => setEmoji(emoji.native)}></Picker>
         <Autocomplete
           fullWidth
           options={autoCategory}
@@ -112,6 +117,7 @@ export default function CreateMarkdown () {
       </div>
       <div className="create-preview">
         <h1>{title}</h1>
+        <div>{emoji}</div>
         <CategoryImageArticle>
           <div dangerouslySetInnerHTML={{ __html: categoryImg }} />
         </CategoryImageArticle>
