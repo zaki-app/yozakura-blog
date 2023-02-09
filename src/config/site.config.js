@@ -23,6 +23,10 @@ export const config = {
       href: "/profile"
     }
   ],
+  // トップページカテゴリ画像
+  categoryIcon: {
+    
+  },
   footer: {
     title: "©︎ 2023 Yozakura Blog"
   }

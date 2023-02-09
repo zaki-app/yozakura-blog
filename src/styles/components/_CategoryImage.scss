@@ -16,33 +16,49 @@
 }
 
 /* トップページカテゴリ */
-.category-image-top {
+.category {
   background: var(--white-area-bg-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
   padding: 1.5rem 0;
-  &__box {
-    margin-right: 1rem;
-    .logo {
-      svg {
-        width: 50px;
-        height: 50px;
-        border: 2px solid #313746;
+  .category-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    &__box {
+      text-align: center;
+      img {
+        background: var(--category-icon-background);
+        padding: .5rem;
         border-radius: 50%;
-        background-color: #313746;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
       }
-    }
-    .name {
-      display: flex;
-      justify-content: center;
-      font-weight: bold;
-      font-size: .9rem;
-      color: #313746;
-    }
+      p {
+        font-size: .8rem;
+        font-weight: bold;
+        text-align: center;
+        color: var(--category-icon-font);
+      }
+    }    
   }
+    // .logo {
+    //   svg {
+    //     width: 50px;
+    //     height: 50px;
+    //     border: 2px solid #313746;
+    //     border-radius: 50%;
+    //     background-color: #313746;
+    //     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    //   }
+    // }
+    // .name {
+    //   display: flex;
+    //   justify-content: center;
+    //   font-weight: bold;
+    //   font-size: .9rem;
+    //   color: #313746;
+    // }
+  // }
 }
 .article-title {
   font-size: 1rem;

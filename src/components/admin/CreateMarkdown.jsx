@@ -3,7 +3,7 @@ import { getCurrentUserNickname } from "@/function/cognito";
 import { changeHtml } from "@/function/markdown";
 import { useEffect, useState } from "react";
 import { Autocomplete, Button, Switch, FormGroup, FormControlLabel, TextField, OutlinedInput } from "@mui/material";
-import { autoCategory } from "@/function/markdown/autoCategory";
+import { autoCategory, autoIndustry } from "@/function/markdown/selectCategory";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "../articles/CategoryImage";
 import data from "@emoji-mart/data";
@@ -12,13 +12,14 @@ import Picker from "@emoji-mart/react";
 export default function CreateMarkdown () {
   // state
   const [title, setTitle] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [emoji, setEmoji] = useState("");
   const [category, setCategory] = useState("");
   const [contents, setContents] = useState("");
   const [markdownContents, setMarkdownContents] = useState([]);
   const [isPublished, setIsPublished] = useState(true);
   const [nickname, setNickname] = useState("");
   const [categoryImg, setCategoryImg] = useState("");
-  const [emoji, setEmoji] = useState("");
 
   // toggle
   function togglePublished () {
@@ -39,6 +40,7 @@ export default function CreateMarkdown () {
     console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
+      industry: industry,
       emoji: emoji,
       category: category,
       contents: contents,
@@ -77,12 +79,22 @@ export default function CreateMarkdown () {
           placeholder="タイトル"
           onChange={(event) => setTitle(event.target.value)}
         />
+        <Autocomplete
+          fullWidth
+          options={autoIndustry}
+          renderInput={params => <TextField {...params} placeholder="職種カテゴリ" />}
+          onChange={(event, value) => {
+            console.log("何が入るかな", value);
+            setIndustry(value.category);
+          }}
+        />
         <Picker data={data} onEmojiSelect={(emoji) => setEmoji(emoji.native)}></Picker>
         <Autocomplete
           fullWidth
           options={autoCategory}
           renderInput={params => <TextField {...params} placeholder="カテゴリ" />}
           onChange={(event, value) => {
+            console.log("何が入るかな", value);
             setCategory(value.category);
             getSvg(value.category);
           }}
