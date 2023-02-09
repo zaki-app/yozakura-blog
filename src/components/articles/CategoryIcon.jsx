@@ -5,31 +5,81 @@ import { newDisplayName } from "@/function/categoryName";
 import ArticleCard from '@/components/articles/ArticleCard';
 import ContentsWrapper from "../ContentsWrapper";
 import {ArrowDropDownCircle} from '@mui/icons-material';
+import { emojiParse } from '@/function/emojiParse';
+import Image from 'next/image';
 
 export default function CategoryIcon ({articles}) {
-
-  const categories = useRecoilValue(centerState);
-  const [categoryItems, setCategoryItems] = useState([]);
-  const [category, setCategory] = useState("all");
+  console.log("これはなに？", articles)
+  emojiParse("😷")
+  // const categories = useRecoilValue(centerState);
+  // const [categoryItems, setCategoryItems] = useState([]);
+  // const [category, setCategory] = useState("all");
 
   // 投稿済カテゴリ画像取得
-  useEffect(() => {
-    showIconZone();
-  },[categories]);
+  // useEffect(() => {
+  //   showIconZone();
+  // },[categories]);
 
-  function showIconZone () {
-    setCategoryItems(articles.categoryItems);
-  };
+  // function showIconZone () {
+  //   setCategoryItems(articles.categoryItems);
+  // };
 
-  // アイコンクリック時の表示切り替え
-  function changeArticle (category) {
-    setCategory(category)
-  }
+  // // アイコンクリック時の表示切り替え
+  // function changeArticle (category) {
+  //   setCategory(category)
+  // }
   
   return (
     <>
-      <div className="category-image-top">
-        {categoryItems.map(category => (
+      <div className="category">
+        <div className="category-inner">
+          <div className="category-inner__box">
+            <Image
+              src="/category/all.svg"
+              alt="all"
+              width={50}
+              height={50}
+            />
+            <p>ALL</p>
+          </div>
+          <div className="category-inner__box">
+            <Image
+              src="/category/frontend.svg"
+              alt="all"
+              width={50}
+              height={50}
+            />
+            <p>フロント</p>
+          </div>
+          <div className="category-inner__box">
+            <Image
+              src="/category/backend.svg"
+              alt="all"
+              width={50}
+              height={50}
+            />
+            <p>バック</p>
+          </div>
+          <div className="category-inner__box">
+            <Image
+              src="/category/infra.svg"
+              alt="all"
+              width={50}
+              height={50}
+            />
+            <p>インフラ</p>
+          </div>
+          <div className="category-inner__box">
+            <Image
+              src="/category/other.svg"
+              alt="all"
+              width={50}
+              height={50}
+            />
+            <p>その他</p>
+          </div>
+        </div>
+        {/* {categoryItems.map(category => (
           <div 
           className="category-image-top__box"
           key={category.name}
@@ -44,14 +94,14 @@ export default function CategoryIcon ({articles}) {
               {category.name}
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
       <ContentsWrapper>
         <div className="article-title">
-          <p>{newDisplayName(category)}の記事</p>
+          {/* <p>{newDisplayName(category)}の記事</p> */}
           <ArrowDropDownCircle />
         </div>
-        <ArticleCard select={category} />
+        {/* <ArticleCard select={category} /> */}
       </ContentsWrapper>
     </>
   )

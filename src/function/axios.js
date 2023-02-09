@@ -103,3 +103,14 @@ export async function CategorySearch (category) {
   })
   return result;
 }
+
+export async function IndustrySearch(industry) {
+  const instance = await axiosInstance("GET");
+  const result = instance.get(`/industry/${industry}`).then(res => {
+    console.log("industry get!!", res.data.data);
+    return res.data.data;
+  }).catch(err => {
+    console.error("industry error...". err);
+  })
+  return result;
+}
