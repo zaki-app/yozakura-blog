@@ -50,6 +50,10 @@
 }
 // マークダウン CSS
 .md-contents {
+  background: var(--white-area-bg-color);
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   h1, h2, h3, h4 {
     margin: .5rem 0;
   }
