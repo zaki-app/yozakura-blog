@@ -92,18 +92,35 @@ export async function deleteArticle (id) {
   return result;
 }
 
-// category
-export async function CategorySearch (category) {
+/**
+ * カテゴリーごとの記事を取得する
+ * articleIdを入れると、現在表示している記事は取得しない
+ * @param {} category 
+ * @param {limit(上限), articleId(表示している記事)} option
+ * @returns カテゴリに紐づいた記事
+ */
+export async function categorySearch (category, option) {
   const instance = await axiosInstance("GET");
-  const result = instance.get(`/category/${category}`).then(res => {
-    console.log("category get!!", res.data.data);
-    return res.data.data;
-  }).catch(err => {
-    console.error("category error...", err);
-  })
+  const result = instance.get(`/category/${category}`, {
+    params: {
+      limit: option.limit,
+      // 詳細ページでは今表示している記事以外の関連記事を表示する
+      articleId: option.articleId,
+    }})
+    .then(res => {
+      console.log("category get!!", res.data.data);
+      return res.data.data;
+    }).catch(err => {
+      console.error("category error...", err);
+    })
   return result;
 }
 
+/**
+ * 職種カテゴリでの取得
+ * @param {職種カテゴリ} industry 
+ * @returns 
+ */
 export async function IndustrySearch(industry) {
   const instance = await axiosInstance("GET");
   const result = instance.get(`/industry/${industry}`).then(res => {
