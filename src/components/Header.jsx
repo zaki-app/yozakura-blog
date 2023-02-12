@@ -34,14 +34,12 @@ export default function Header () {
     <header className="header">
       <div className="header__title">
         <Link href={"/"}>
-          <h1>
-            <Image 
-              src={config.siteIcon}
-              alt="サイトロゴ"
-              width={50}
-              height={50}
-            />
-          </h1>
+          <Image 
+            src={config.siteIcon}
+            alt="サイトロゴ"
+            width={50}
+            height={50}
+          />
         </Link>
       </div>
       <div className="header__lists">

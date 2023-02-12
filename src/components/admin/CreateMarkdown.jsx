@@ -2,12 +2,14 @@ import { createArticle } from "@/function/axios";
 import { getCurrentUserNickname } from "@/function/cognito";
 import { changeHtml } from "@/function/markdown";
 import { useEffect, useState } from "react";
-import { Autocomplete, Button, Switch, FormGroup, FormControlLabel, TextField, OutlinedInput } from "@mui/material";
+import { Autocomplete, Switch, FormGroup, FormControlLabel, TextField } from "@mui/material";
 import { autoCategory, autoIndustry } from "@/function/markdown/selectCategory";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { CategoryImageArticle } from "../articles/CategoryImage";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import Image from "next/image";
+import { emojiParse, emojiParseOnly } from "@/function/emojiParse";
 
 export default function CreateMarkdown () {
   // state
@@ -20,6 +22,7 @@ export default function CreateMarkdown () {
   const [isPublished, setIsPublished] = useState(true);
   const [nickname, setNickname] = useState("");
   const [categoryImg, setCategoryImg] = useState("");
+  const [activeEmoji, setActiveEmoji] = useState(false);
 
   // toggle
   function togglePublished () {
@@ -37,7 +40,7 @@ export default function CreateMarkdown () {
   // create
   async function create (e) {
     e.preventDefault();
-    console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
+    // console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
       industry: industry,
@@ -48,7 +51,6 @@ export default function CreateMarkdown () {
       nickname: nickname
     }
     const response = await createArticle(params);
-    console.log("結果", response);
   }
 
   function changeVal (e) {
@@ -59,9 +61,13 @@ export default function CreateMarkdown () {
     } else if (name === "contents") {
       setContents(val);
       const result = changeHtml(val);
-      console.log(result);
       setMarkdownContents(result);
     }
+  }
+
+  function emojiSelect (e) {
+    console.log("クリックされました", e)
+    setActiveEmoji(!activeEmoji);
   }
 
   // カテゴリ画像を取得
@@ -73,66 +79,88 @@ export default function CreateMarkdown () {
   return (
     <div className="create">
       <div className="create-input">
-      <FormGroup>
-        <TextField
-          sx={{ mb: 1 }}
-          placeholder="タイトル"
-          onChange={(event) => setTitle(event.target.value)}
-        />
-        <Autocomplete
-          fullWidth
-          options={autoIndustry}
-          renderInput={params => <TextField {...params} placeholder="職種カテゴリ" />}
-          onChange={(event, value) => {
-            console.log("何が入るかな", value);
-            setIndustry(value.category);
-          }}
-        />
-        <Picker data={data} onEmojiSelect={(emoji) => setEmoji(emoji.native)}></Picker>
-        <Autocomplete
-          fullWidth
-          options={autoCategory}
-          renderInput={params => <TextField {...params} placeholder="カテゴリ" />}
-          onChange={(event, value) => {
-            console.log("何が入るかな", value);
-            setCategory(value.category);
-            getSvg(value.category);
-          }}
-        />
-        カテゴリ{ category }
-        <div className="create-input__contents">
-          <textarea 
-            type="text"
-            name="contents"
-            placeholder="ここに本文を書いてね"
-            value={contents}
-            onChange={changeVal}
+        <FormGroup>
+          <TextField
+            sx={{ mb: 1 }}
+            placeholder="タイトル"
+            onChange={(event) => setTitle(event.target.value)}
           />
-        </div>
-        <FormControlLabel
-          control={
-            <Switch 
-              onClick={togglePublished}
-              defaultChecked
+          <Autocomplete
+            fullWidth
+            options={autoIndustry}
+            renderInput={params => <TextField {...params} placeholder="職種カテゴリ" />}
+            onChange={(event, value) => {
+              setIndustry(value.category);
+            }}
+          />
+          <button
+            className="create-input__selectEmoji"
+            onClick={emojiSelect}
+          >
+            アイキャッチ画像を選択
+            {activeEmoji ? (
+              <div className="emoji">
+                <Picker
+                  className={activeEmoji ? "active" : ""}
+                  data={data} 
+                  onEmojiSelect={(emoji) => setEmoji(emoji.native)}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+          </button>
+          <Autocomplete
+            fullWidth
+            options={autoCategory}
+            renderInput={params => <TextField {...params} placeholder="カテゴリ" />}
+            onChange={(event, value) => {
+              setCategory(value.category);
+              getSvg(value.category);
+            }}
+          />
+          <div className="create-input__contents">
+            <textarea 
+              type="text"
+              name="contents"
+              placeholder="ここに本文を書いてね"
+              value={contents}
+              onChange={changeVal}
             />
-          }
-          label={ isPublished ? "公開" : "非公開" }
-        />
-        <div dangerouslySetInnerHTML={{ __html: isPublished }}></div>
-        <Button 
-          onClick={create}
-          variant="contained"
-        >
-          { isPublished ?  "保存" : "一時保存" }
-        </Button>
-      </FormGroup>
+          </div>
+          <FormControlLabel
+            control={
+              <Switch 
+                onClick={togglePublished}
+                defaultChecked
+              />
+            }
+            label={ isPublished ? "公開" : "非公開" }
+          />
+          <button
+            className="create-input__selectEmoji"
+            onClick={create}
+          >
+            { isPublished ?  "保存" : "一時保存" }
+          </button>
+        </FormGroup>
       </div>
+      {/* プレビュー */}
       <div className="create-preview">
+        <div className="selected-category">
+          <p>{industry}</p>
+          <p>{category}</p>
+        </div>
+        <div className="selected-isPublished">
+          公開設定：<p>{isPublished ? "公開します" : "一時保存用"}</p>
+        </div>
+        <div className="select">
+          <div className="selected-emoji">{emoji}</div>
+          {/* <div
+            dangerouslySetInnerHTML={{ __html: categoryImg }}
+          /> */}
+        </div>
         <h1>{title}</h1>
-        <div>{emoji}</div>
-        <CategoryImageArticle>
-          <div dangerouslySetInnerHTML={{ __html: categoryImg }} />
-        </CategoryImageArticle>
         <div
           className="md-contents"
           dangerouslySetInnerHTML={{ __html: markdownContents }} 

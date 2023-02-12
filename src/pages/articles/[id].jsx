@@ -25,24 +25,26 @@ export default function ArticleId ({article, categories}) {
                   <History />
                   <p>{article.updatedAt ? `${article.updatedAt}に更新`: `${article.createdAt}に投稿` }</p>
                 </figcaption>
-                {article.emoji 
-                  ? <Image 
-                      src={emojiParse(article.emoji)} 
-                      alt="絵文字" 
-                      width={50}
-                      height={50}
-                    />
-                  : <Image
-                      src={emojiParse("😷")}
-                      alt="絵文字がない"
-                      width={50}
-                      height={50}
-                    />
-                }
+                <div className="eyecatch">
+                  {article.emoji
+                    ? <Image 
+                        src={emojiParse(article.emoji)} 
+                        alt="絵文字" 
+                        width={80}
+                        height={80}
+                      />
+                    : <Image
+                        src={emojiParse("😷")}
+                        alt="絵文字がない"
+                        width={80}
+                        height={80}
+                      />
+                  }
+                </div>
                 <div className="title">
                   <h1>{article.title}</h1>
                 </div>
-                <figcaption>
+                <figcaption className="user">
                   <DriveFileRenameOutline />
                   <p>{article.nickname}が投稿しました</p>
                 </figcaption>

@@ -6,3 +6,7 @@ export const emojiParse = (emoji) => {
   console.log(url)
   return url;
 }
+
+export const emojiPaseOnly = (emoji) => {
+  return parse(emoji);
+}
