@@ -11,8 +11,6 @@ import Image from "next/image";
 import { ArrowDropDownCircle } from "@mui/icons-material";
 
 export default function ArticleId ({article, categories}) {
-  console.log("props", article);
-  console.log("来てるか？", categories)
   return (
     <>
       <PageSEO title={article.title} />
