@@ -63,7 +63,7 @@
   .article-card {
     height: 5rem;
     display: grid;
-    border-bottom: 1px solid #ccc;
+    // border-bottom: 1px solid #ccc;
     grid-template-columns: 5rem 1fr;
     grid-template-rows: 1fr 1rem 2rem;
     grid-template-areas: 
@@ -88,7 +88,7 @@
     }
     &__title {
       grid-area: title;
-      font-size: 1.1rem;
+      font-size: 1rem;
       margin-left: 1rem;
     }
     &__createdAt {
