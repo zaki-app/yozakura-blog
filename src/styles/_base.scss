@@ -6,6 +6,12 @@ html {
   line-height: 1.7;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
   background: var(--base-background);
   padding: 0;
