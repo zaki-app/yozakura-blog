@@ -82,7 +82,9 @@
 }
 // マークダウン CSS
 .md-contents {
-  width: 100%;
+  -webkit-box-sizing: border-box;  /*webkit系*/
+  -moz-box-sizing: border-box;  /*Firefox*/
+  box-sizing: border-box;
   background: var(--white-area-bg-color);
   padding: 1rem;
   border-radius: 5px;
@@ -92,6 +94,7 @@
   }
   pre {
     background-color: #1A2737;
+    border-radius: 5px;
     padding: 1rem;
     color: #E6F2FF;
     overflow-x: scroll;
@@ -102,12 +105,9 @@
     object-fit: cover;
   }
   a {
-    width: 100%;
     color: var(--link-font-color);
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
   p {
-    width: 100%;
-    overflow-wrap: break-word;
   }
 }
