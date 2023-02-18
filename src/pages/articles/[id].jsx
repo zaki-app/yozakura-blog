@@ -8,6 +8,7 @@ import PageSEO from "@/components/PageSEO";
 import ArticleCard from "@/components/articles/ArticleCard";
 import { emojiParse } from "@/function/emojiParse";
 import Image from "next/image";
+import { ArrowDropDownCircle } from "@mui/icons-material";
 
 export default function ArticleId ({article, categories}) {
   console.log("props", article);
@@ -56,6 +57,10 @@ export default function ArticleId ({article, categories}) {
             />
           </div>
           {/* その他の同じ言語カテゴリーの記事 */}
+          <div className="article-title">
+            <p>その他の{article.category}の記事</p>
+            <ArrowDropDownCircle />
+          </div>
           <div className="article-column">
             <ArticleCard articles={categories} />
           </div>
