@@ -1,14 +1,14 @@
 import ContentsWrapper from "@/components/ContentsWrapper";
 import { categorySearch, getArticleId, getArticles } from "@/function/axios";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
-import { CategoryImageArticle } from "@/components/articles/CategoryImage";
 import { changeHtml } from "@/function/markdown";
 import { History, DriveFileRenameOutline } from '@mui/icons-material';
 import PageSEO from "@/components/PageSEO";
 import ArticleCard from "@/components/articles/ArticleCard";
 import { emojiParse } from "@/function/emojiParse";
 import Image from "next/image";
-import { ArrowDropDownCircle } from "@mui/icons-material";
+import OtherArticle from "@/components/articles/OtherArticle";
+import { newDisplayName } from "@/function/categoryName";
 
 export default function ArticleId ({article, categories}) {
   return (
@@ -54,13 +54,16 @@ export default function ArticleId ({article, categories}) {
               dangerouslySetInnerHTML={{ __html: changeHtml(article.contents) }}
             />
           </div>
-          {/* その他の同じ言語カテゴリーの記事 */}
-          <div className="article-title">
-            <p>その他の{article.category}の記事</p>
-            <ArrowDropDownCircle />
-          </div>
           <div className="article-column">
-            <ArticleCard articles={categories} />
+            <div className="article-column__title">
+              {/* その他の同じ言語カテゴリーの記事 */}
+              <OtherArticle category={newDisplayName(article.category)}/>
+            </div>
+            <div className="article-column__article">
+              {categories.length === 0 
+                ? `${newDisplayName(article.category)}の投稿はまだありません`
+                : <ArticleCard articles={categories} />}
+            </div>
           </div>
         </div>
       </ContentsWrapper>
@@ -89,7 +92,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({params}) => {
   
-  // console.log("getStaticPropsです", params.id);
   console.time("getid")
   const article = await getArticleId(params.id);
   const svg = await getS3CategoryImage(article.category);

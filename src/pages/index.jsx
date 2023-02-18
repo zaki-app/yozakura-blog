@@ -1,15 +1,12 @@
 import PageSEO from '@/components/PageSEO';
 import { getArticles } from '@/function/axios';
-import { newDisplayName } from '@/function/categoryName';
-import { emojiParse } from '@/function/emojiParse';
 import Image from 'next/image';
-import {ArrowDropDownCircle} from '@mui/icons-material';
 import { autoIndustry } from '@/function/markdown/selectCategory';
-import Link from 'next/link';
 import { useState } from 'react';
 import { IndustrySearch } from '@/function/axios';
 import ContentsWrapper from '@/components/ContentsWrapper';
 import ArticleCard from '@/components/articles/ArticleCard';
+import OtherArticle from '@/components/articles/OtherArticle';
 
 export default function Home({articles}) {
   
@@ -17,7 +14,7 @@ export default function Home({articles}) {
   const [select, setSelect] = useState("すべて");
 
   async function selectedArticle (industry) {
-    setSelect(industry.label);
+    setSelect(industry.fullLabel);
     const result = await IndustrySearch(industry.category);
     if (industry.category !== "all") {
       setSelectArticles(result);
@@ -51,10 +48,7 @@ export default function Home({articles}) {
       </div>
       {/* ボタン */}
       <ContentsWrapper>
-        <div className="article-title">
-          <p>{select}の記事</p>
-          <ArrowDropDownCircle />
-        </div>
+        <OtherArticle category={select} />
         {/* 記事 */}
         <div className="article-link">
           <ArticleCard articles={selectArticles} />

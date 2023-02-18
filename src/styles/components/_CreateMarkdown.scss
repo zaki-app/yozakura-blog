@@ -93,11 +93,13 @@
     margin: .5rem 0;
   }
   pre {
+    width: 100%;
+    white-space: pre-wrap;
+    overflow: auto;
     background-color: #1A2737;
     border-radius: 5px;
     padding: 1rem;
     color: #E6F2FF;
-    overflow-x: scroll;
   }
   img {
     width: 100%;

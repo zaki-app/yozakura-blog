@@ -7,10 +7,10 @@ export const autoCategory = [
 ]
 
 export const autoIndustry = [
-  { id: 1, label: "すべて", category: "all", src: "/category/all.svg" },
-  { id: 2, label: "フロント", category: "frontend", src: "/category/frontend.svg"},
-  { id: 3, label: "バック", category: "backend", src: "/category/backend.svg" },
-  { id: 4, label: "インフラ", category: "infra", src: "/category/infra.svg" },
-  { id: 5, label: "DB", category: "db", src: "/category/database.svg" },
-  { id: 6, label: "その他", category: "other", src: "/category/other.svg" },
+  { id: 1, fullLabel: "すべて", label: "すべて", category: "all", src: "/category/all.svg" },
+  { id: 2, fullLabel: "フロントエンド", label: "フロント", category: "frontend", src: "/category/frontend.svg"},
+  { id: 3, fullLabel: "バックエンド", label: "バック", category: "backend", src: "/category/backend.svg" },
+  { id: 4, fullLabel: "インフラ", label: "インフラ", category: "infra", src: "/category/infra.svg" },
+  { id: 5, fullLabel: "データベース", label: "DB", category: "db", src: "/category/database.svg" },
+  { id: 6, fullLabel: "その他", label: "その他", category: "other", src: "/category/other.svg" },
 ]
