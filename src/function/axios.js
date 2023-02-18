@@ -52,6 +52,19 @@ export async function getArticleId (articleId) {
 }
 
 /* admin */
+// 記事を非公開含め全て取得
+export async function getArticlesAdmin() {
+  const instance = await axiosInstance("GET");
+  const result = instance.get("/articles-admin").then(res => {
+    console.log("all articles", res.data.data);
+    return res.data.data;
+  }).catch(err => {
+    console.error("all articles error", err);
+    return err;
+  })
+  return result;
+}
+
 // create
 export async function createArticle (params) {
   const instance = await axiosInstance("POST");
