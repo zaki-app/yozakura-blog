@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { Autocomplete, Switch, FormGroup, FormControlLabel, TextField } from "@mui/material";
 import { autoCategory, autoIndustry } from "@/function/markdown/selectCategory";
 import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
-import { CategoryImageArticle } from "../articles/CategoryImage";
+// import { CategoryImageArticle } from "../articles/CategoryImage";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import Image from "next/image";
-import { emojiParse, emojiParseOnly } from "@/function/emojiParse";
+// import Image from "next/image";
+// import { emojiParse, emojiParseOnly } from "@/function/emojiParse";
 
 export default function CreateMarkdown () {
   // state
