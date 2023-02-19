@@ -3,6 +3,8 @@ import UseRequireLogin from "@/function/hooks/useRequireLogin";
 import Link from "next/link";
 import { getArticlesAdmin, deleteArticle } from "@/function/axios";
 import { newDisplayName } from "@/function/categoryName";
+import Image from "next/image";
+import { emojiParse } from "@/function/emojiParse";
 // mui
 import { 
   Table, 
@@ -14,7 +16,6 @@ import {
   Paper,
   Button,
   Stack,
-  Typography,
 } from "@mui/material";
 
 export default function Articles ({articles}) {
@@ -63,7 +64,16 @@ export default function Articles ({articles}) {
             {articles.map(article => (
               <tr key={article.articleId}>
                 <TableCell>{article.isPublished ? "公開中": "公開されてません"}</TableCell>
-                <TableCell>{article.emoji ? article.emoji : ""}</TableCell>
+                <TableCell>
+                  {article.emoji 
+                    ? <Image
+                        src={emojiParse(article.emoji)}
+                        alt="絵文字"
+                        width={30}
+                        height={30}
+                      />
+                    : ""}
+                </TableCell>
                 <TableCell>{article.title}</TableCell>
                 <TableCell>{newDisplayName(article.category)}</TableCell>
                 <TableCell>{article.industry ? article.industry : '---'}</TableCell>

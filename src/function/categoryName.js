@@ -29,3 +29,32 @@ export const newDisplayName = (category) => {
   
   return result;
 }
+
+export const newIndustryName = (industry) => {
+  let result; 
+  
+  switch(industry) {
+    case "all":
+      result = "すべて";
+      break;
+    case "frontend":  
+      result = "フロントエンド";
+      break;
+    case "backend":
+      result = "バックエンド";
+      break;
+    case "infra":
+      result = "インフラ";
+      break;
+    case "db":
+      result = "データベース";
+      break;
+    case "other":
+      result = "その他";
+      break;
+    default:
+      result = "すべて";
+  }
+
+  return result;
+}

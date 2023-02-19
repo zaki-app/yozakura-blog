@@ -1,11 +1,18 @@
 .create {
-  // background: gray;
+  overflow-wrap: anywhere;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 1fr;
   grid-template-areas: "input preview";
+  grid-template-rows: 1fr;
   gap: 1rem;
   width: 100%;
   background: #fafafa;
+  @include mq(custom) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+              "input"
+              "preview";
+  }
   .create-input {
     grid-area: input;
     &__selectEmoji {
@@ -28,12 +35,11 @@
     }
     &__contents {
       width: 100%;
-      // background: red;
       textarea {
         background: #222222;
         color: #cccc;
         width: 100%;
-        height: 500px;
+        height: 100vmax;
         font-size: 1rem;
         padding: 1rem;
         margin-top: .5rem;
@@ -44,7 +50,6 @@
   // preview
   .create-preview {
     grid-area: preview;
-    // background: #fafafa;
     background: var(--base-background);
     padding: 1rem;
     border: 3rem var(--base-background);
@@ -90,7 +95,16 @@
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   h1, h2, h3, h4 {
-    margin: .5rem 0;
+    margin: 1.3rem 0;
+  }
+  h1, h2 {
+    background: var(--headline-color);
+    border-left: 5px solid var(--base-background);
+    padding: .5rem 1rem;
+  }
+  h3, h4, h5 {
+    border-left: 5px solid var(--headline-color-left);
+    padding: .3rem 1rem;
   }
   pre {
     width: 100%;
@@ -111,5 +125,12 @@
     overflow-wrap: anywhere;
   }
   p {
+  }
+
+  blockquote {
+    border-left: 5px solid #ccc;
+    p {
+      margin-left: 1rem;
+    }
   }
 }
