@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }) {
   // ローディング 
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(false);
+  const [devLogin, setDevLogin] = useState(false);
   
   useEffect(() => {
     const start = (url) => {
@@ -35,7 +36,7 @@ export default function App({ Component, pageProps }) {
       router.events.off('routeChangeComplete', complete);
       router.events.off('routeChangeError', complete);
     }
-  })
+  });
 
   const loadingComponent = (<Loading />)
 
