@@ -95,7 +95,7 @@
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   h1, h2, h3, h4 {
-    margin: 1.3rem 0;
+    margin: 3rem 0 2.5rem 0;
   }
   h1, h2 {
     background: var(--headline-color);
@@ -108,7 +108,7 @@
   }
   pre {
     width: 100%;
-    white-space: pre-wrap;
+    // white-space: pre-wrap;
     overflow: auto;
     background-color: #1A2737;
     border-radius: 5px;

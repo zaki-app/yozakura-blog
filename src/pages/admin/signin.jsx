@@ -1,11 +1,27 @@
 import PageSEO from "@/components/PageSEO";
 import ContentsWrapper from "@/components/ContentsWrapper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "@/function/cognito";
 import { useRouter } from "next/router";
 
 export default function SignIn () {
   const router = useRouter();
+  const [adminUser, setAdminUser] = useState(false);
+  useEffect(() => {
+    const login = prompt("ログイン", "")
+    if (login === process.env.NEXT_PUBLIC_ADMIN_NAME) {
+      const password = prompt("ログイン", "")
+      if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+        setAdminUser(true);
+      } else {
+        setAdminUser(false);
+        router.push("/");
+      }
+    } else {
+      setAdminUser(false);
+      router.push("/");
+    }
+  }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
