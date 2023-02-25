@@ -54,8 +54,6 @@ export async function signIn (username, password) {
     // グローバルに保存したい
     const { signInUserSession } = user;
     const idToken = signInUserSession.getIdToken().getJwtToken();
-    // console.log("取れるか？tokenとれた これをstoreに保存か？", idToken);
-    // store.dispatch(addIdToken({ idToken: idToken }));
     return true;
   } catch (err) {
     console.error("signin error...", err);
@@ -92,7 +90,7 @@ export async function currentAuthUser () {
 export async function getCurrentUserIdToken () {
   const result = await Auth.currentSession();
   const idToken = result.getIdToken().getJwtToken();
-  console.log(idToken);
+  // console.log(idToken);
   return idToken;
 }
 

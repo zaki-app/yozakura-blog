@@ -3,12 +3,12 @@ import { useState } from "react";
 import { changeHtml } from "@/function/markdown";
 import { newDisplayName, newIndustryName } from "@/function/categoryName";
 import { Autocomplete, Switch, FormGroup, FormControlLabel, TextField } from "@mui/material";
-import { autoCategory, autoIndustry } from "@/function/markdown/selectCategory";
+import { autoIndustry } from "@/function/markdown/selectCategory";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
 export default function Update (article) {
-  console.log("更新記事", article)
+  // console.log("更新記事", article)
 
   const [title, setTitle] = useState(article.title);
   const [industry, setIndustry] = useState(article.industry);
@@ -40,7 +40,6 @@ export default function Update (article) {
   }
 
   function emojiSelect (e) {
-    console.log("クリックされました", e)
     setActiveEmoji(!activeEmoji);
   }
 

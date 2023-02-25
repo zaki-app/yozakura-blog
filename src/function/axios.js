@@ -5,13 +5,13 @@ import { getCurrentUserIdToken } from "./cognito";
 async function axiosInstance (method) {
   let instance;
   if (method === "GET") {
-    console.log("axios get");
+    // console.log("axios get");
     instance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_ARTICLE_ENDPOINT,
       timeout: 3000,
     });
   } else {
-    console.log("axios post or put or delete");
+    // console.log("axios post or put or delete");
     // post, put, delete is must idToken
     const idToken = await getCurrentUserIdToken();
     
@@ -30,7 +30,7 @@ async function axiosInstance (method) {
 export async function getArticles () {
   const instance = await axiosInstance("GET");
   const result = instance.get("/articles").then(res => {
-    console.log("all articles", res.data.data);
+    // console.log("all articles", res.data.data);
     return res.data.data;
   }).catch(err => {
     console.error("all articles error", err);
@@ -42,7 +42,7 @@ export async function getArticles () {
 export async function getArticleId (articleId) {
   const instance = await axiosInstance("GET");
   const result = instance.get(`/article/${articleId}`).then(res => {
-    console.log(`${articleId} get Success`, res.data);
+    // console.log(`${articleId} get Success`, res.data);
     return res.data.data;
   }).catch(err => {
     console.error("not id error", err);
@@ -56,7 +56,7 @@ export async function getArticleId (articleId) {
 export async function getArticlesAdmin() {
   const instance = await axiosInstance("GET");
   const result = instance.get("/articles-admin").then(res => {
-    console.log("all articles", res.data.data);
+    // console.log("all articles", res.data.data);
     return res.data.data;
   }).catch(err => {
     console.error("all articles error", err);
@@ -69,10 +69,11 @@ export async function getArticlesAdmin() {
 export async function createArticle (params) {
   const instance = await axiosInstance("POST");
   const result = instance.post(`/article`, params).then(res => {
-    console.log(`${params} create Success`, res);
+    // console.log(`${params} create Success`, res);
+    alert("登録に成功しました");
     return res;
   }).catch(err => {
-    console.error("create error...", err);
+    alert("create error...", err);
     return err;
   })
   return result;
@@ -80,13 +81,14 @@ export async function createArticle (params) {
 
 // update 
 export async function updateArticle (id, params) {
-  console.log("送ってる情報", params)
+  // console.log("送ってる情報", params)
   const instance = await axiosInstance("PUT");
   const result = instance.put(`/article/${id}`, params).then(res => {
-    console.log(`${params} update Success.. id = ${id}`, res);
+    // console.log(`${params} update Success.. id = ${id}`, res);
+    alert("更新に成功しました");
     return res.data.data;
   }).catch(err => {
-    console.error("update error...", err);
+    alert("update error...", err);
     return err;
   })
   return result;
@@ -96,7 +98,7 @@ export async function updateArticle (id, params) {
 export async function deleteArticle (id) {
   const instance = await axiosInstance("DELETE");
   const result = instance.delete(`/article/${id}`).then(res => {
-    console.log(`delete Success... id= ${id}`, res);
+    // console.log(`delete Success... id= ${id}`, res);
     return res
   }).catch(err => {
     console.error("delete error...", err);
@@ -121,7 +123,7 @@ export async function categorySearch (category, option) {
       articleId: option.articleId,
     }})
     .then(res => {
-      console.log("category get!!", res.data.data);
+      // console.log("category get!!", res.data.data);
       return res.data.data;
     }).catch(err => {
       console.error("category error...", err);
@@ -137,7 +139,7 @@ export async function categorySearch (category, option) {
 export async function IndustrySearch(industry) {
   const instance = await axiosInstance("GET");
   const result = instance.get(`/industry/${industry}`).then(res => {
-    console.log("industry get!!", res.data.data);
+    // console.log("industry get!!", res.data.data);
     return res.data.data;
   }).catch(err => {
     console.error("industry error...". err);
