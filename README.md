@@ -11,3 +11,13 @@ hosting...Amplify(SSR)
 yarn build
 yarn dev
 ```
+
+## ページ構成
+|  エンドポイント  |  レンダリング  |
+| ---- | ---- |
+|  /  |  ISR  |
+|  /articles/[id]  |  SG  |
+
+
+リダイレクト設定すればISRで行けるかも  
+https://zenn.dev/jaga/articles/redirect-settings-automation-on-amplify-hosting

@@ -1,0 +1,117 @@
+.article-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 1.5rem;
+  @include mq(md) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  &__contents {
+    .info {
+      padding: 1rem;
+      background: var(--white-area-bg-color);
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      .eyecatch {
+        text-align: center;
+        margin: 1rem 0;
+      }
+      .date {
+        display: flex;
+        align-items: center;
+        font-size: .8rem;
+        font-weight: bold;
+        p {
+          margin-left: .5rem;
+        }
+      }
+      .title {
+        font-size: .9rem;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .user {
+        display: flex;
+        justify-content: flex-end;
+        font-size: .8rem;
+        font-weight: bold;
+        p {
+          margin-left: .5rem;
+        }
+      }
+    }
+  }
+}
+.article-column {
+  // width: 100%;
+  margin-left: 1rem;
+  background: var(--white-area-bg-color);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 1rem;
+  @include mq(md) {
+    margin-left: 0;
+  }
+  &__article {
+    .article-card {
+      margin-top: 1rem;
+      display: grid;
+      gap: 1rems;
+      grid-template-columns: 5rem 1fr;
+      grid-template-rows: 1fr 1rem 2rem;
+      grid-template-areas: 
+                    "logo title"
+                    "logo createdAt"
+                    "logo category";
+      padding: .5rem 0;
+      &__logo {
+        grid-area: logo;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background: var(--blue-ara-bg-color);
+        border-radius: 10px;
+        &__emoji {
+          padding: .5rem;
+          font-size: 1.5rem;
+          display: flex;
+          justify-content: center;
+        }
+      }
+      &__title {
+        grid-area: title;
+        font-size: .8rem;
+        margin-left: 1rem;
+      }
+      &__createdAt {
+        align-items: center;
+        grid-area: createdAt;
+        display: flex;
+        align-items: center;
+        font-size: .6rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+        margin-left: 1rem;
+      }
+      &__category {
+        grid-area: category;
+        margin-left: 1rem;
+        margin-top: .5rem;
+        width: 5rem;
+        max-width: 6rem;
+        font-size: .8rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+        background: var(--blue-ara-bg-color);
+        color: var(--white-font-color);
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

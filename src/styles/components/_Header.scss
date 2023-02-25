@@ -1,0 +1,28 @@
+.header {
+  // max-width: var(--base-content-width);
+  background: var(--base-background);
+  color: #fff;
+  margin: 0 auto;
+  padding: 1rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--base-header-height);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  &__title {
+    // font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  &__lists {
+    display: flex;
+    font-weight: bold;
+    font-size: 1.1rem;
+    p {
+      margin-left: 1rem;
+    }
+  }
+}

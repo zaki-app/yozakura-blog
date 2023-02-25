@@ -1,0 +1,17 @@
+.loading {
+  background-color: var(--loading-bg-color);
+  opacity: .5;
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  bottom: 0;
+  &__icon {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}

@@ -1,5 +1,19 @@
 @import "@/styles/_base.scss";
 @import "@/styles/_variables.scss";
+@import "@/styles/_utils.scss";
 
 // components
 @import "@/styles/components/_ContentsWrapper.scss";
+@import "@/styles/components/_Header.scss";
+@import "@/styles/components/_Footer.scss";
+@import "@/styles/components/_Button.scss";
+@import "@/styles/components/_CreateMarkdown.scss";
+@import "@/styles/components/_CategoryImage.scss";
+@import "@/styles/components/ArticleCard.scss";
+@import "@/styles/components/Loading.scss";
+
+// pages
+@import "@/styles/pages/_articleDetail.scss";
+
+// highlight
+@import 'highlight.js/styles/vs2015.css';

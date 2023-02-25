@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: var(--white-area-bg-color);
+  &__logo {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+}
