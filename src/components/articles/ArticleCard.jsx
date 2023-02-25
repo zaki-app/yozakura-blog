@@ -1,8 +1,4 @@
-import { CategorySearch, getArticles } from "@/function/axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { centerState } from "@/function/atom/Atom";
 import { newDisplayName } from "@/function/categoryName";
 import { emojiParse } from "@/function/emojiParse";
 import Image from "next/image";

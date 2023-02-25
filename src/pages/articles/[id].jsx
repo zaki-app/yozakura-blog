@@ -1,6 +1,5 @@
 import ContentsWrapper from "@/components/ContentsWrapper";
 import { categorySearch, getArticleId, getArticles } from "@/function/axios";
-import { getS3CategoryImage } from "@/function/s3/getCategoryImage";
 import { changeHtml } from "@/function/markdown";
 import { History, DriveFileRenameOutline } from '@mui/icons-material';
 import PageSEO from "@/components/PageSEO";
@@ -9,8 +8,10 @@ import { emojiParse } from "@/function/emojiParse";
 import Image from "next/image";
 import OtherArticle from "@/components/articles/OtherArticle";
 import { newDisplayName } from "@/function/categoryName";
+import { useEffect, useState } from "react";
 
 export default function ArticleId ({article, categories}) {
+
   return (
     <>
       <PageSEO title={article.title} />
@@ -34,7 +35,7 @@ export default function ArticleId ({article, categories}) {
                       />
                     : <Image
                         src={emojiParse("😷")}
-                        alt="絵文字がない"
+                        alt="not emoji"
                         width={80}
                         height={80}
                       />
@@ -71,42 +72,17 @@ export default function ArticleId ({article, categories}) {
   )
 }
 
-export const getStaticPaths = async () => {
-  const isProd = process.env.NODE_ENV === 'production';
-
-  const articles = await getArticles();
-  const paths = articles.map(article => {
-    return {
-      params: {
-        id: article.articleId.toString()
-      }
-    }
-  })
-  console.log("Pathsです", paths);
-  return {
-    paths,
-    // ローカルのみfallbackを有効
-    fallback: isProd ? false : 'blocking'
-  }
-}
-
-export const getStaticProps = async ({params}) => {
-  
-  console.time("getid")
+export const getServerSideProps = async ({ params }) => {
   const article = await getArticleId(params.id);
-  const svg = await getS3CategoryImage(article.category);
-  article.svg = svg;
-  const categoryArticles = await categorySearch(article.category, {
-    limit: 5,
+  // 同じカテゴリ記事を取得
+  const categoryArticles = await categorySearch(article.categories, {
+    limit: 10,
     articleId: article.articleId,
   });
-  // console.log("カテゴリの記事", categoryArticles) 
-  console.timeEnd("getid")
   return {
-    props: { 
+    props: {
       article: article,
-      categories: categoryArticles,
-    },
-    // revalidate: 10
+      categories: categoryArticles
+    }
   }
 }

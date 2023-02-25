@@ -7,6 +7,7 @@ import { IndustrySearch } from '@/function/axios';
 import ContentsWrapper from '@/components/ContentsWrapper';
 import ArticleCard from '@/components/articles/ArticleCard';
 import OtherArticle from '@/components/articles/OtherArticle';
+import Loading from '@/components/Loading';
 
 export default function Home({articles}) {
   
@@ -47,13 +48,16 @@ export default function Home({articles}) {
         </div>
       </div>
       {/* ボタン */}
-      <ContentsWrapper>
-        <OtherArticle category={select} />
-        {/* 記事 */}
-        <div className="article-link">
-          <ArticleCard articles={selectArticles} />
-        </div>
-      </ContentsWrapper>
+      {selectArticles.length < 0
+        ? <Loading />
+        : <ContentsWrapper>
+            <OtherArticle category={select} />
+            {/* 記事 */}
+            <div className="article-link">
+              <ArticleCard articles={selectArticles} />
+            </div>
+          </ContentsWrapper>
+      }
     </>
   )
 }

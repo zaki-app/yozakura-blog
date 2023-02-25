@@ -20,7 +20,6 @@ import {
 
 export default function Articles ({articles}) {
   UseRequireLogin();
-  console.log(articles)
 
   // 削除
   async function deleteArticleBtn (id) {
