@@ -8,7 +8,6 @@ import { emojiParse } from "@/function/emojiParse";
 import Image from "next/image";
 import OtherArticle from "@/components/articles/OtherArticle";
 import { newDisplayName } from "@/function/categoryName";
-import { useEffect, useState } from "react";
 
 export default function ArticleId ({article, categories}) {
 
@@ -72,17 +71,36 @@ export default function ArticleId ({article, categories}) {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getStaticPaths = async () => {
+  const isProd = process.env.NODE_ENV === 'production';
+
+  const articles = await getArticles();
+  const paths = articles.map(article => {
+    return {
+      params: {
+        id: article.articleId.toString(),
+      }
+    }
+  });
+  return {
+    paths,
+    // ローカルのみfallbackを有効
+    fallback: isProd ? false : 'blocking',
+  }
+}
+
+export const getStaticProps = async ({params}) => {
   const article = await getArticleId(params.id);
-  // 同じカテゴリ記事を取得
-  const categoryArticles = await categorySearch(article.categories, {
+
+  const categoryArticles = await categorySearch(article.category, {
     limit: 10,
     articleId: article.articleId,
   });
+
   return {
     props: {
       article: article,
-      categories: categoryArticles
+      categories: categoryArticles,
     }
   }
 }

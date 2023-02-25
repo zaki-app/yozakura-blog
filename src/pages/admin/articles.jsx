@@ -17,9 +17,24 @@ import {
   Button,
   Stack,
 } from "@mui/material";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Articles ({articles}) {
-  UseRequireLogin();
+  const router = useRouter();
+  const [isDisplay, setIsDisplay] = useState(false);
+
+  useEffect(() => {
+    (async() => {
+      const loginStatus = await UseRequireLogin();
+
+      if (loginStatus) {
+        setIsDisplay(loginStatus);
+      } else {
+        router.push('/');
+      }
+    })();
+  }, []);
 
   // 削除
   async function deleteArticleBtn (id) {
@@ -28,76 +43,83 @@ export default function Articles ({articles}) {
     
     await deleteArticle(id);
   }
-  
+  const admin = "管理画面を表示"; 
 
   return (
-    <ContentsWrapper>
-      <Stack 
-        direction="row"
-        spacing={2}
-        alignItems="center"
-        mb={2}
-      >
-        <h1>管理者ページ</h1>
-        {/* <Typography>管理者ページ</Typography> */}
-        <Link href={"/admin/article-create"}>
-          <Button variant="contained">新規作成</Button>
-        </Link>
-      </Stack>
-      {/* テーブルエリア */}
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>公開状態</TableCell>
-              <TableCell>絵文字</TableCell>
-              <TableCell>タイトル</TableCell>
-              <TableCell>TOPカテゴリ</TableCell>
-              <TableCell>言語別カテゴリ</TableCell>
-              <TableCell>作成日</TableCell>
-              <TableCell>作成者</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {articles.map(article => (
-              <tr key={article.articleId}>
-                <TableCell>{article.isPublished ? "公開中": "公開されてません"}</TableCell>
-                <TableCell>
-                  {article.emoji 
-                    ? <Image
-                        src={emojiParse(article.emoji)}
-                        alt="絵文字"
-                        width={30}
-                        height={30}
-                      />
-                    : ""}
-                </TableCell>
-                <TableCell>{article.title}</TableCell>
-                <TableCell>{newDisplayName(article.category)}</TableCell>
-                <TableCell>{article.industry ? article.industry : '---'}</TableCell>
-                <TableCell>{article.createdAt}</TableCell>
-                <TableCell>{article.nickname}</TableCell>
-                <TableCell>
-                  <Stack
-                    direction="row"
-                  >
-                    <Link href={`/admin/update/${article.articleId}`}>
-                      <Button variant="contained" sx={{mr: 2}}>更新</Button>
-                    </Link>
-                    <Button 
-                      variant="contained"
-                      color="error"
-                      onClick={() => deleteArticleBtn(article.articleId)}
-                    >削除</Button>
-                  </Stack>
-                </TableCell>
-              </tr>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </ContentsWrapper>
+    <>
+      {isDisplay 
+      ? <ContentsWrapper>
+          <Stack 
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            mb={2}
+          >
+            <h1>管理者ページ</h1>
+            {/* <Typography>管理者ページ</Typography> */}
+            <Link href={"/admin/article-create"}>
+              <Button variant="contained">新規作成</Button>
+            </Link>
+          </Stack>
+          {/* テーブルエリア */}
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>公開状態</TableCell>
+                  <TableCell>絵文字</TableCell>
+                  <TableCell>タイトル</TableCell>
+                  <TableCell>TOPカテゴリ</TableCell>
+                  <TableCell>言語別カテゴリ</TableCell>
+                  <TableCell>作成日</TableCell>
+                  <TableCell>作成者</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {articles.map(article => (
+                  <tr key={article.articleId}>
+                    <TableCell>{article.isPublished ? "公開中": "公開されてません"}</TableCell>
+                    <TableCell>
+                      {article.emoji 
+                        ? <Image
+                            src={emojiParse(article.emoji)}
+                            alt="絵文字"
+                            width={30}
+                            height={30}
+                          />
+                        : ""}
+                    </TableCell>
+                    <TableCell>{article.title}</TableCell>
+                    <TableCell>{newDisplayName(article.category)}</TableCell>
+                    <TableCell>{article.industry ? article.industry : '---'}</TableCell>
+                    <TableCell>{article.createdAt}</TableCell>
+                    <TableCell>{article.nickname}</TableCell>
+                    <TableCell>
+                      <Stack
+                        direction="row"
+                      >
+                        <Link href={`/admin/update/${article.articleId}`}>
+                          <Button variant="contained" sx={{mr: 2}}>更新</Button>
+                        </Link>
+                        <Button 
+                          variant="contained"
+                          color="error"
+                          onClick={() => deleteArticleBtn(article.articleId)}
+                        >削除</Button>
+                      </Stack>
+                    </TableCell>
+                  </tr>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </ContentsWrapper>
+      : <ContentsWrapper>
+        </ContentsWrapper>
+      }
+    </>
+
   )
 }
 

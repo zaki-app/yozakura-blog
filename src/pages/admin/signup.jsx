@@ -2,11 +2,28 @@ import PageSEO from "@/components/PageSEO";
 import ContentsWrapper from "@/components/ContentsWrapper";
 import { signUp } from "@/function/cognito";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignUp () {
-  // router
   const router = useRouter();
+  const [adminUser, setAdminUser] = useState(false);
+  useEffect(() => {
+    const login = prompt("ログイン", "")
+    if (login === process.env.NEXT_PUBLIC_ADMIN_NAME) {
+      const password = prompt("ログイン", "")
+      if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+        console.log("trueに入ります");
+        setAdminUser(true);
+      } else {
+        setAdminUser(false)
+        console.log("falseに入ります")
+        router.push("/");
+      }
+    } else {
+      setAdminUser(false);
+      router.push("/");
+    }
+  }, []);
   // sign up
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,45 +58,51 @@ export default function SignUp () {
 
   return (
     <>
-      <PageSEO title="サインアップ" />
-      <ContentsWrapper>
-        <h1>サインアップ</h1>
-        <form onSubmit={executeSignUp}>
-          <label>メールアドレス</label>
-          <input
-            type="email" 
-            name="email"
-            value={email}
-            onChange={changeVal}
-          />
-          <br />
-          <label>パスワード</label>
-          <input
-            type="password" 
-            name="password"
-            value={password}
-            onChange={changeVal}
-          />
-          <br />
-          <label>ユーザー名</label>
-          <input
-            type="nickname" 
-            name="nickname"
-            value={nickname}
-            onChange={changeVal}
-          />
-          <br />
-          <label>プロフィール</label>
-          <textarea
-            type="profile" 
-            name="profile"
-            value={profile}
-            onChange={changeVal}
-          />
-          <br />
-          <button type="submit">登録</button>
-        </form>
-      </ContentsWrapper>
+      {adminUser
+        ? <>
+            <PageSEO title="サインアップ" />
+            <ContentsWrapper>
+              <h1>サインアップ</h1>
+              <form onSubmit={executeSignUp}>
+                <label>メールアドレス</label>
+                <input
+                  type="email" 
+                  name="email"
+                  value={email}
+                  onChange={changeVal}
+                />
+                <br />
+                <label>パスワード</label>
+                <input
+                  type="password" 
+                  name="password"
+                  value={password}
+                  onChange={changeVal}
+                />
+                <br />
+                <label>ユーザー名</label>
+                <input
+                  type="nickname" 
+                  name="nickname"
+                  value={nickname}
+                  onChange={changeVal}
+                />
+                <br />
+                <label>プロフィール</label>
+                <textarea
+                  type="profile" 
+                  name="profile"
+                  value={profile}
+                  onChange={changeVal}
+                />
+                <br />
+                <button type="submit">登録</button>
+              </form>
+            </ContentsWrapper>
+          </>
+        : <ContentsWrapper />
+      }
+      
     </>
   )
 }

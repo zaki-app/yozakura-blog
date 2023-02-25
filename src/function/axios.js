@@ -123,7 +123,7 @@ export async function categorySearch (category, option) {
       articleId: option.articleId,
     }})
     .then(res => {
-      // console.log("category get!!", res.data.data);
+      console.log("category get!!", res);
       return res.data.data;
     }).catch(err => {
       console.error("category error...", err);

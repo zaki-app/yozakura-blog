@@ -1,12 +1,16 @@
-import { useRouter } from "next/router";
 import { getCurrentUserIdToken } from "../cognito";
 
-export default function UseRequireLogin () {
-  const router = useRouter();
-  getCurrentUserIdToken().then(res => {
-    // console.log("何が入るか？", res);
+/**
+ * ログイン判定に使用
+ * @returns boolean
+ */
+export default async function UseRequireLogin () {
+  const status = await getCurrentUserIdToken().then(res => {
+    return true;
   }).catch(err => {
-    // リロードアイコンを入れないと見れてしまう
-    router.push("/");
+    return false;
   });
+  // const loginStatus = await getCurrentUserIdToken();
+  // console.log("status", status);
+  return status;
 }
