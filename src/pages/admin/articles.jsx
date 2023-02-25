@@ -43,7 +43,6 @@ export default function Articles ({articles}) {
     
     await deleteArticle(id);
   }
-  const admin = "管理画面を表示"; 
 
   return (
     <>

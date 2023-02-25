@@ -1,0 +1,32 @@
+.error {
+  display: flex;
+  justify-content: center;
+  background: var(--white-area-bg-color);
+  width: 100%;
+  min-height: 100vh;
+  &__inner {
+    padding: 3rem 1rem;
+    h1 {
+      text-align: center;
+      font-size: 4rem;
+    }
+    .status-message {
+      text-align: center;
+    }
+    .icon {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .error-btn {
+      border: none;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      background: var(--blue-ara-bg-color);
+      color: var(--white-font-color);
+      font-weight: bold;
+      border-radius: 10px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+  }
+}
