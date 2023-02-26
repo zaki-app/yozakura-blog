@@ -15,7 +15,7 @@ export async function signUp (username, password, nickname, profile) {
         enabled: true
       }
     });
-    console.log("success", user);
+    // console.log("success", user);
     return true;
   } catch (err) {
     console.error("signUp error...", err);
@@ -27,7 +27,7 @@ export async function signUp (username, password, nickname, profile) {
 export async function resendCode (username) {
   try {
     await Auth.resendSignUp(username);
-    console.log("success resend code");
+    // console.log("success resend code");
     return true;
   } catch (err) {
     console.error("resend code error...", err);
@@ -39,7 +39,7 @@ export async function resendCode (username) {
 export async function confirmCode (username, code) {
   try {
     await Auth.confirmSignUp(username, code);
-    console.log("confirm success");
+    // console.log("confirm success");
     return true;
   } catch (err) {
     console.log("error confirm code", err);

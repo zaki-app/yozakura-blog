@@ -1,35 +1,18 @@
 import ContentsWrapper from "@/components/ContentsWrapper";
-import { Grid, Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
+import { Grid, Stepper, Step, StepLabel, Button, Typography, Container } from "@mui/material";
 import { useState } from "react";
 import InputContact from "@/components/contact/Input";
 import ConfirmContact from "@/components/contact/Confirm";
 import CompleteContact from "@/components/contact/Complete";
+import PageSEO from "@/components/PageSEO";
+import Link from "next/link";
 
-function getSteps() {
-  return [
-    'お問い合わせ入力',
-    '確認',
-    'お問い合わせ完了',
-  ]
-}
-
-function getStepContent(stepIndex) {
-  console.log(stepIndex);
-  switch(stepIndex) {
-    case 0:
-      return <InputContact />;
-    case 1:
-      return <ConfirmContact />;
-    case 2:
-      return <CompleteContact />;
-    default:
-      return 'Unknown stepIndex';
-  }
-}
+const steps = ['お問い合わせ入力', '確認', 'お問い合わせ完了',];
 
 export default function Contact () {
   const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
+  const [formValue, setFormValue] = useState({});
+
   const handleNext = () => {
     setActiveStep(prev => prev + 1);
   };
@@ -40,45 +23,65 @@ export default function Contact () {
     setActiveStep(0);
   }
 
+  // コンポーネントの振り分け
+  const changeForm = (activeStep) => {
+    switch(activeStep) {
+      case 0:
+        return (
+          <InputContact
+            handleNext={handleNext}
+            formValue={formValue}
+            setFormValue={setFormValue}
+          />
+        );
+      case 1:
+        return (
+          <ConfirmContact
+            handleNext={handleNext}
+            handleBack={handleBack}
+            formValue={formValue}
+            setFormValue={setFormValue}
+          />
+        );
+      case 2:
+        return (
+          <CompleteContact
+            handleNext={handleNext}
+            formValue={formValue}
+            setFormValue={setFormValue}
+          />
+        );
+    }
+  }
+
   return (
-    <ContentsWrapper>
-      <h1>コンタクトページ</h1>
-      <Grid container>
-        <Grid sm={2} />
-        <Grid>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map(label => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          {activeStep === steps.length ? (
-            <div>
-              <Typography>全ステップの表示を終了</Typography>
-              <Button onClick={handleReset}>リセット</Button>
-            </div>
-          ) : (
-            <div>
-              <Typography>{getStepContent(activeStep)}</Typography>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-              >
-                戻る
-              </Button>
-              <Button
-                variant="contained" 
-                color="primary"
-                onClick={handleNext} 
-              >
-                {activeStep === Step.length - 1 ? '送信' : '次へ'}
-              </Button>
-            </div>
-          
-          )}
-        </Grid>
-      </Grid>
-    </ContentsWrapper>
+    <>
+      <PageSEO title="お問い合わせ" />
+      <ContentsWrapper>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === Step.length ? (
+          <>
+            <Typography>
+              最後のページに表示されるところ
+            </Typography>
+          </>
+        ) : (
+          <>
+            <Typography
+              sx={{ mt:2, mb:1 }}
+            >
+              現在のステップ場所 {activeStep + 1}
+            </Typography>
+            {changeForm(activeStep)}
+          </>
+        )}
+      </ContentsWrapper>
+    </>
   )
 }

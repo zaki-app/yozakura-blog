@@ -62,7 +62,6 @@ export default function Update (article) {
   }
 
   async function updateArticleId(e) {
-    console.log(article.articleId)
     e.preventDefault();
     const params = {
       title: title,
@@ -190,7 +189,6 @@ export default function Update (article) {
 }
 
 export async function getServerSideProps({params}) {
-  console.log("getServer", params);
   const article = await getArticleId(params.id);
   const markdownContents = changeHtml(article.contents);
   article.markdownContents = markdownContents;
