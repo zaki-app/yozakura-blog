@@ -1,7 +1,13 @@
+import { Button } from "@mui/joy";
+import Link from "next/link";
+
 export default function CompleteContact () {
   return (
     <>
-      送信完了画面
+      お問い合わせいただきありがとうございました。
+      <Button>
+        <Link href="/">トップへ戻る</Link>
+      </Button>
     </>
   )
 }

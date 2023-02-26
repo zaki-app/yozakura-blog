@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 // カテゴリ画像を返すだけ
 export const CategoryBlock = (props) => {
-  console.log("カテゴリーブロック");
   const [category, setCategory] = useState("");
 
   useEffect(() => {
