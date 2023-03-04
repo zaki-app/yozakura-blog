@@ -1,7 +1,8 @@
 import { Button } from "@mui/joy";
+import { contactValue } from "@/types/contactType";
 
-export default function ConfirmContact (props) {
-  console.log(props.formValue.input)
+export default function ConfirmContact (props: any) {
+  console.log(props)
   const value = props.formValue.input;
 
   return (
