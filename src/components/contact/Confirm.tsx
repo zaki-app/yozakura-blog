@@ -1,9 +1,6 @@
 import { Button } from "@mui/joy";
-import { contactValue } from "@/types/contactType";
 
 export default function ConfirmContact (props: any) {
-  console.log(props)
-  console.log("url", process.env.NEXT_PUBLIC_CONTACT_GAS_URL)
   const value = props.formValue.input;
   
   const handleSubmit = async() => {
@@ -16,10 +13,10 @@ export default function ConfirmContact (props: any) {
       formBody.push(encodeKey + "=" + encodeVal);
     }
     const newBody = formBody.join("&");
-    console.log("新しいボディ", newBody);
 
     // gasでスプレッドシートに保存
-    await fetch(process.env.NEXT_PUBLIC_CONTACT_GAS_URL, {
+    const url = process.env.NEXT_PUBLIC_CONTACT_GAS_URL;
+    await fetch(url, {
       method: "POST",
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -29,7 +26,7 @@ export default function ConfirmContact (props: any) {
       props.handleNext();
     }).catch(err => {
       alert("送信に失敗しました");
-      console.log("送信エラー", err)
+      console.log("送信エラー", err);
     })
   }
 

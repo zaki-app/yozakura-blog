@@ -75,7 +75,7 @@ export default function Contact () {
             <Typography
               sx={{ mt:2, mb:1 }}
             >
-              現在のステップ場所 {activeStep + 1}
+              {/* 現在のステップ場所 {activeStep + 1} */}
             </Typography>
             {changeForm(activeStep)}
           </>
