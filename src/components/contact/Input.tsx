@@ -41,7 +41,6 @@ export default function InputContact (props: any) {
   }
 
   // 確認画面から戻ってきたときに入力値を表示
-  console.log("１ページ", props)
   useEffect(() => {
     const inputValue = props.formValue.input;
     if(inputValue) {
