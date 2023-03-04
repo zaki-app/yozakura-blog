@@ -56,14 +56,16 @@ export default function Contact () {
   return (
     <>
       <PageSEO title="お問い合わせ" />
-      <ContentsWrapper>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map(label => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+      <div className="contact">
+        <div className="contact__stepper">          
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map(label => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
         {activeStep === Step.length ? (
           <>
             <Typography>
@@ -80,7 +82,7 @@ export default function Contact () {
             {changeForm(activeStep)}
           </>
         )}
-      </ContentsWrapper>
+      </div>
     </>
   )
 }

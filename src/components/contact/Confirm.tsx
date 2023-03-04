@@ -1,4 +1,5 @@
-import { Button } from "@mui/joy";
+import { Grid, Box, Typography } from "@mui/joy";
+import { Button } from "@mui/material";
 
 export default function ConfirmContact (props: any) {
   const value = props.formValue.input;
@@ -33,21 +34,44 @@ export default function ConfirmContact (props: any) {
   }
 
   return (
-    <>
-      下記の内容でよろしいですか？
-      <p>{value.name}</p>
-      <p>{value.email}</p>
-      <p>{value.contact}</p>
-      <Button
-        onClick={props.handleBack}
-      >
-        戻って編集
-      </Button>
-      <Button
-        onClick={handleSubmit}
-      >
-        送信する
-      </Button>
-    </>
+    <Grid sx={{ mt: 4 }}>
+      <Typography level="h4" sx={{mb: 2}}>
+        下記の内容でよろしいですか？
+      </Typography>
+      <Box sx={{ mb: 3 }}>
+        <h5>お名前</h5>
+        <Typography level="h4" sx={{mt: 1}}>
+          {value.name}
+        </Typography>
+      </Box>
+      <Box sx={{ mb: 3 }}>
+        <h4>メールアドレス</h4>
+        <Typography level="h4" sx={{mt: 1}}>
+          {value.email}
+        </Typography>
+      </Box>
+      <Box sx={{ mb: 5 }}>
+        <h4>お問い合わせ内容</h4>
+        <Typography level="h4" sx={{mt: 1}}>
+          {value.contact}
+        </Typography>
+      </Box>
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={props.handleBack}
+        >
+          戻って編集
+        </Button>
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          color="primary"
+        >
+          送信する
+        </Button>
+      </Box>
+    </Grid>
   )
 }
