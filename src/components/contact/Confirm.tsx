@@ -16,18 +16,20 @@ export default function ConfirmContact (props: any) {
 
     // gasでスプレッドシートに保存
     const url = process.env.NEXT_PUBLIC_CONTACT_GAS_URL;
-    await fetch(url, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: newBody,
-    }).then(res => {
-      props.handleNext();
-    }).catch(err => {
-      alert("送信に失敗しました");
-      console.log("送信エラー", err);
-    })
+    if (url) {
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: newBody,
+      }).then(res => {
+        props.handleNext();
+      }).catch(err => {
+        alert("送信に失敗しました");
+        console.log("送信エラー", err);
+      })
+    }
   }
 
   return (
