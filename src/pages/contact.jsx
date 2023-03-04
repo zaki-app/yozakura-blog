@@ -1,11 +1,10 @@
 import ContentsWrapper from "@/components/ContentsWrapper";
-import { Grid, Stepper, Step, StepLabel, Button, Typography, Container } from "@mui/material";
+import { Stepper, Step, StepLabel, Button, Typography, Container } from "@mui/material";
 import { useState } from "react";
 import InputContact from "@/components/contact/Input";
 import ConfirmContact from "@/components/contact/Confirm";
 import CompleteContact from "@/components/contact/Complete";
 import PageSEO from "@/components/PageSEO";
-import Link from "next/link";
 
 const steps = ['お問い合わせ入力', '確認', 'お問い合わせ完了',];
 
