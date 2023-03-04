@@ -37,7 +37,6 @@ export default function CreateMarkdown () {
   // create
   async function create (e) {
     e.preventDefault();
-    // console.log("save data", title, category, contents, markdownContents, isPublished, nickname)
     const params = {
       title: title,
       industry: industry,
@@ -63,7 +62,6 @@ export default function CreateMarkdown () {
   }
 
   function emojiSelect (e) {
-    console.log("クリックされました", e)
     setActiveEmoji(!activeEmoji);
   }
 

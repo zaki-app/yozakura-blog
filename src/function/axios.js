@@ -98,11 +98,11 @@ export async function updateArticle (id, params) {
 export async function deleteArticle (id) {
   const instance = await axiosInstance("DELETE");
   const result = instance.delete(`/article/${id}`).then(res => {
-    // console.log(`delete Success... id= ${id}`, res);
-    return res
+    alert("削除しました");
+    return true;
   }).catch(err => {
-    console.error("delete error...", err);
-    return err;
+    alert("delete error...", err);
+    return false;
   })
   return result;
 }

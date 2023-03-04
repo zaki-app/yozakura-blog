@@ -2,6 +2,7 @@ export const config = {
   siteMeta: {
     title: "Yozakura Blog",
     rel: "icon",
+    // icon: "https://cdn.jsdelivr.net/npm/twemoji@11.3.0/2/svg/1f338.svg",
     icon: "https://cdn.jsdelivr.net/npm/twemoji@11.3.0/2/svg/1f338.svg",
     description: "Yozakura Blog"
   },

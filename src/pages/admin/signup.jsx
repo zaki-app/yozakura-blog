@@ -12,11 +12,9 @@ export default function SignUp () {
     if (login === process.env.NEXT_PUBLIC_ADMIN_NAME) {
       const password = prompt("ログイン", "")
       if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-        console.log("trueに入ります");
         setAdminUser(true);
       } else {
-        setAdminUser(false)
-        console.log("falseに入ります")
+        setAdminUser(false);
         router.push("/");
       }
     } else {
