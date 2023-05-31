@@ -17,11 +17,13 @@ export default function Home({ articles }) {
         console.log("これはなんだ？", industry);
         setSelect(industry.fullLabel);
         const result = await IndustrySearch(industry.category);
+        console.log(result);
         if (industry.category !== "all") {
             setSelectArticles(result);
         } else {
             const response = await getArticles();
             console.log("レスポンス", response);
+            setSelectArticles(response);
             // setSelectArticles(articles);
         }
     }
